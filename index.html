@@ -20,93 +20,76 @@
     <title>React App</title>
   </head>
   <body>
+    <button id='btn'>
+      Click!
+    </button>
+
     <script>
-       let state = {
-      categories: [
+      let now = new Date()
+      document.getElementById('btn').addEventListener(
+        'click',
+        ()=>{
+          console.log(now)
+        }
+      )
+      
+      let arr = [
         {
-          path: 'food',
-          name: "Еда",
-          spent: 0,
-          text: 'text',
-          payments: [
+          date: 'Fri Feb 10 2018 22:33:19 GMT+0700 (RTZ 6 (зима))',
+          test: [
             {
-              paymentText: 'Мясо',
-              paymentAmount: 50
+              test11: 'test11'
             },
             {
-              paymentText: 'Фрукты',
-              paymentAmount: 45
-            },
+              test12: 'test13'
+            }
+          ]
+        },  
+        {
+          date: now,
+          test: [
+            {
+              test21: 'test21'
+            }
           ]
         },
         {
-          path: 'apartment',
-          name: "Квартира",
-          spent: 0,
-          text: 'text',
-          payments: [
+          date: 'Fri Feb 10 2018 22:33:19 GMT+0700 (RTZ 6 (зима))',
+          test: [
             {
-              paymentText: 'Вода',
-              paymentAmount: 50
+              test31: 'test31'
+            },
+            {
+              test32: 'test32'
             }
           ]
         }
       ]
-    }
-
-      let newObj = {
-        paymentText: 'TEST',
-        paymentAmount: 5056548
-      }
-      let index = 0
+      // console.log(new Date(arr[1]['date']).getDate() === new Date(arr[2]['date']).getDate())
+      // console.log(new Date(arr[1].date).getMonth())
       
-        let state2 = {
-          categories: [
-            ...state.categories,
-            state.categories[index] = {
-              ...state.categories[index],
-              payments: [
-                ...state.categories[index].payments,
-                newObj
-              ]
+      // let arr2 = arr.sort((a,b)=>new Date(a.date) - new Date(b.date))
+      // console.log(arr2)
+      // ариант с map
+        let arr3 = arr.map((item, i) =>
+          item.test.map((item, index) => {
+              console.log(item);
+              return item
             }
+          )
+        )
+        
+      console.log(arr3)
 
-          ]
-        } 
-        console.log(state)
-  
+      // вариант с push()
+      // let arr3 = [];
+      // arr.forEach(item=>
+      //   item.test.forEach(item=>
+      //     arr3.push(item)
+      //   )
+      // );
+      // console.log(arr3)
 
-
-      // let obj = {
-      //   categories:[
-      //     {
-      //       b: 10,
-      //       payments:[
-      //         {
-      //           c: 20
-      //         }
-      //       ]
-      //     },
-      //     {
-      //       test: 'test'
-      //     }
-      //   ]
-      // }
-      
-      // let prop = {
-      //   x: 100
-      // }
-
-      // let newObj2 = {
-      //   categories:[
-      //     ...obj.categories,
-      //     obj.categories[0]={
-      //       ...obj.categories[0], 
-      //       a:[...obj.categories[0].payments, prop]
-      //     }
-      //   ]
-      // }
-      // console.log(obj)
     </script>
     <div id="root"></div>
     <!--

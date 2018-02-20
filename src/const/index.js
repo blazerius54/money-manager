@@ -1,2 +1,3 @@
 export const INCREMENT_SPENT = 'INCREMENT_SPENT';
 export const ADD_PAYMENT = 'ADD_PAYMENT'; 
+export const CHANGE_DATE = 'CHANGE_DATE'; 

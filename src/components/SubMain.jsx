@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
-import CategItem from './CategItem';
+// import Categ from './Categ';
+import Payment from './Payment';
 import { bindActionCreators } from 'redux';
 import { increment, addPayment } from '../actions/index';
+// import moment from 'moment';
 
 class SubMain extends Component {
     constructor (props) {
@@ -13,49 +15,66 @@ class SubMain extends Component {
             paymentAmount: 0
         }
     }
+    
 
-    handleSubmit (e, index) {
+    handleSubmit (e, index, categ) {
+        this.sendPaymentAmount(index,  this.state.paymentAmount)
         e.preventDefault();
-        this.props.addPayment(this.state.paymentText, this.state.paymentAmount, index)
+        this.props.addPayment(this.state.paymentText, this.state.paymentAmount, index);
 
         this.setState({
             paymentText: '',
             paymentAmount: 0
         })
         
-        this.paymentText.value = '',
-        this.paymentAmount.value = 0
+        this.paymentText.value = '';
+        this.paymentAmount.value = 0;
     } 
     
-    foo(categ, index) {
-        console.log(categ)
-        this.props.increment(categ, index)
+    sendPaymentAmount(index, paymentAmount) {
+        this.props.increment(index, paymentAmount)
     }
+
+
+
     render () {
         const path = this.props.match.params.name;
-        const index =  this.props.categories.findIndex(item=>{
+        const index = this.props.categories.findIndex(item=>{
             return item.path === path
         })
-        const categ =  this.props.categories[index]
+        const categ = this.props.categories[index]
+        
         // console.log(categ)
         return (
+            
             <div>
                 <h2>I`m sub-main</h2>
                 {/* <Link to='/main'><p>Money Manager</p></Link> */}
                 <p>
                     {categ.name} {categ.spent}
                 </p>
-                <p>{categ.text}</p>
-                {categ.payments.map((item, index)=>{
-                    return (
-                        <div key={index}>
-                            <p>{item.paymentText}: {item.paymentAmount}</p>
-                        </div>
-                    )
-                })}
+                <ul className='payments-container'>
+                    {
+                        categ.payments.map((item, i)=>{
+                            return (
+                                <Payment key={i} item={item} index={index} i={i} categ={categ} {...this.props}/>
+                                // <li key={index} className='payment-container'>
+                                //         <div>
+                                //             <p>{item.paymentText}: {item.paymentAmount}</p>
+                                //         </div>
+                                //         <div>
+                                //             <p>{moment(new Date(item.date)).format("Do MMM YYYY")}</p>
+                                //         </div>
+                                //         {/* {(new Date(item.date).toString())} */}
+                                //         {/* {item.date.getMonth().toString()} */}
+                                // </li>
+                            )
+                        })
+                    }
+                </ul>
                 {/* <CategItem index={index} categ={categ} {...this.props}/> */}
                 <div className="div-form">
-                    <form onSubmit={(e)=>this.handleSubmit(e, index)}>
+                    <form onSubmit={(e)=>this.handleSubmit(e, index, categ)}>
                         <input 
                         ref={(ref=>{this.paymentText = ref})}
                         type="text"
@@ -72,9 +91,6 @@ class SubMain extends Component {
 
                     </form>
                 </div>
-                <button
-                onClick={()=>this.foo(categ, index)}
-                >click</button>
             </div>
         )
     }

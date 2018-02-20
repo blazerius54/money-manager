@@ -11,3 +11,14 @@
 .info p {
     margin-left: 3px;
 }
+
+.payments-container {
+    width: 20%;
+}
+
+.payment-container {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid grey;
+}

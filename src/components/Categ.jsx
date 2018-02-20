@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-class CategItem extends Component {
+class Categ extends Component {
     render () {
         const { name, spent, path } = this.props.categ;
         return (
@@ -16,4 +16,4 @@ class CategItem extends Component {
     }
 }
 
-export default CategItem;
+export default Categ;
