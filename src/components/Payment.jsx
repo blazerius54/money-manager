@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { changeDate } from '../actions/index';
+import { changePayment, deletePayment } from '../actions/index';
 import { bindActionCreators } from 'redux';
+
 
 class Payment extends Component {
     constructor (props) {
         super (props);
         this.state = {
             isEditing: false,
-            text: this.props.item.paymentText,
-            amount: this.props.item.paymentAmount,
-            date: this.props.item.date,
+            text: '',
+            amount: '',
+            date: new Date(Date.now()),
             // newPayment
         }
     }
+
+    // componentDidMount () {
+    //     this.setState({
+    //         text: this.props.item.paymentText,
+    //         amount: this.props.item.paymentAmount,
+    //         date: this.props.item.date
+    //     })
+
+    //     console.log(this.state)
+    // }
 
     renderDate () {
         if(this.state.isEditing === true){
@@ -36,20 +47,24 @@ class Payment extends Component {
     }
 
     handleEditDate () {
-        this.props.changeDate(this.state.text, this.state.amount, this.state.date, this.props.index, this.props.i)
-        // console.log(this.props.index)
+        this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.index, this.props.i, this.props.item.id)
         this.setState({
-            text: '',
-            amount: 0,
-            date: null,
-            isEditing: false
+            // text: '',
+            // amount: 0,
+            // date: null,
+            isEditing: false,
+            // xx: '2018-02-03'
         });
-        this.textInput.value = '';
-        this.amountInput.value = '';
-        this.dateInput.value = '';
+        // console.log(this.props.index)
+        // this.textInput.value = '';
+        // this.amountInput.value = '';
+        // this.dateInput.value = '';
     }
 
     render () {
+        //форматируем дату для инпута 
+        let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
+        // console.log(this.props.item.date)
         return <div>
             <li className="payment-container">
               <div>
@@ -73,8 +88,10 @@ class Payment extends Component {
                             />
                         </div>
                         :
-                        <p>{this.props.item.paymentText}: {this.props.item.paymentAmount}</p>
-                        
+                        <div>
+                            <p>{this.props.item.paymentText}: {this.props.item.paymentAmount}</p>
+                            <button onClick={()=>this.props.deletePayment(this.props.item.id, this.props.index)}>Delete</button>
+                        </div>                         
                     }
                 
               </div>
@@ -86,7 +103,8 @@ class Payment extends Component {
                         <input 
                         type='date' 
                         placeholder="date"
-                        defaultValue={new Date(this.props.item.date)}
+                        id='datePicker'
+                        defaultValue={dafaultDate}
                         onChange={(e)=>this.setState({date: e.target.value})}
                         ref={(ref=> {this.dateInput = ref})}
                         />
@@ -96,7 +114,12 @@ class Payment extends Component {
                     </div>
                     : 
                     <p
-                        onClick={() => this.setState({ isEditing: true })}
+                        onClick={() => this.setState({ 
+                            isEditing: true,
+                            // text: this.textInput.value,
+                            // amount: this.amountInput.value,
+                            // date: this.dateInput.value,
+                        })}
                     >
                         {moment(new Date(this.props.item.date)).format(
                         "Do MMM YYYY"
@@ -118,7 +141,7 @@ class Payment extends Component {
 // }
 
 function mapDispatchToProps (dispatch) {
-    return bindActionCreators({ changeDate }, dispatch)
+    return bindActionCreators({ changePayment, deletePayment }, dispatch)
 }
 export default connect(null, mapDispatchToProps)(Payment);
 // export default Payment;

@@ -55,7 +55,11 @@ class SubMain extends Component {
                 </p>
                 <ul className='payments-container'>
                     {
-                        categ.payments.map((item, i)=>{
+                        categ.payments.sort((a, b) => {
+                            let date1 = new Date(a.date);
+                            let date2 = new Date(b.date);
+                            return date1 - date2;
+                        }).map((item, i)=>{
                             return (
                                 <Payment key={i} item={item} index={index} i={i} categ={categ} {...this.props}/>
                                 // <li key={index} className='payment-container'>

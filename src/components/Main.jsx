@@ -8,7 +8,7 @@ class Main extends Component {
         super(props);
         this.state = {
             month: 0,
-            payments: []
+            categories: []
         }
     }
 
@@ -17,15 +17,16 @@ class Main extends Component {
     componentDidMount () {
         let arr = [];
 
-        this.props.categories.forEach((item, index) => {
-            item.payments.sort((a, b) => {
+        arr = this.props.categories.map((item, index) => {
+           return item.payments.sort((a, b) => {
                 let date1 = new Date(a.date);
                 let date2 = new Date(b.date);
                 return date1 - date2;
-            }).forEach((payment, i) => {
-                arr.push(payment);
-            });
+            })
         });
+
+        
+        
 
         
         this.setState({
@@ -42,6 +43,9 @@ class Main extends Component {
     }
 
     render () {
+
+        // console.log(arr)
+
         let totalSpent = this.props.categories.reduce((a, b)=>{
             return a.spent + b.spent
         })
@@ -66,30 +70,58 @@ class Main extends Component {
                 <div>
                     <ul className='payments-container'>
                         {
-                            this.state.payments.filter((item, index) => {
-                                // console.log(date.getMonth())
-                                let date = item.date;
-                                date = new Date(date).getMonth();
-                                return date === this.state.month;
-                            }).map((item, index) => {
-                                monthSpent+=item.paymentAmount;
-                                if(prevCat === item.categoryName) {
-                                    // console.log('Старая категория')
-                                    prevCat = item.categoryName
-                                    return (
-                                        <Payment key={index} item={item} {...this.props} />                                            
-                                    )
-                                } else if (prevCat!==item.categoryName){
-                                    // console.log(prevCat)
-                                    prevCat = item.categoryName
-                                    // console.log(prevCat)
-                                    return (
-                                        <div key={index}>
-                                        <p>{item.categoryName}</p>
-                                        <Payment  item={item} {...this.props} />  </div>                                          
-                                    )
-                                }
+
+                            this.props.categories.map((item2, index)=>{
+                                let prevCat = '';
+                                return item2.payments.filter(item=>{
+                                    // console.log(item2)
+                                    let date = item.date;
+                                    date = new Date(date).getMonth();
+                                    if(date === this.state.month){
+                                        return item2
+                                    }
+                                }).map((item, i)=>{
+                                    if(prevCat !== item2.name) {
+                                        prevCat = item2.name;
+                                        return (
+                                            <div key={i}>
+                                                <p>{item2.name}</p>
+                                                <Payment  item={item} index={index} i={i} {...this.props}/>
+                                            </div>
+                                        )
+                                    } else {
+                                        return (
+                                            <Payment key={i} item={item} index={index} i={i} {...this.props}/>
+                                        )
+                                    }
+                                })
                             })
+                            // this.state.payments.filter((item, i) => {
+                            //     // console.log(date.getMonth())
+                            //     let date = item.date;
+                            //     date = new Date(date).getMonth();
+                            //     return date === this.state.month;
+                            // }).map((item, index) => {
+                            //     monthSpent+=item.paymentAmount;
+                            //     if(prevCat === item.categoryName) {
+                            //         // console.log('Старая категория')
+                            //         prevCat = item.categoryName
+                            //         return (
+                                        
+                                        // <Payment key={index} item={item}  {...this.props} />                                            
+                            //         )
+                            //     } else if (prevCat!==item.categoryName){
+                            //         // console.log(prevCat)
+                            //         prevCat = item.categoryName
+                            //         // console.log(prevCat)
+                            //         return (
+                            //             <div key={index}>
+                            //             <p>{item.categoryName}</p>
+                            //             <Payment  item={item} {...this.props} />  </div>                                          
+                            //         )
+                            //     }
+                            // })
+
                         }
                     </ul>
                     <select name="" id="" onChange={(e)=>this.changeMonth(e)}>

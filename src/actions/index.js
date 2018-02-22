@@ -1,4 +1,4 @@
-import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_DATE } from '../const/index';
+import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT } from '../const/index';
 
 export const increment = (index, amount) => {
     const action = {
@@ -26,11 +26,13 @@ export const addPayment = (text, amount, index) => {
     return action    
 }
 
-export const changeDate = (text, amount, date, category, index) => {
+export const changePayment = (text, amount, date, category, index, id) => {
+    // console.log(action)
     const action = {
-        type: CHANGE_DATE,
+        type: CHANGE_PAYMENT,
         category,
         index,
+        id,
         payment: {
             paymentText: text,
             paymentAmount: amount,
@@ -38,6 +40,16 @@ export const changeDate = (text, amount, date, category, index) => {
             
         }
     }
-    console.log(date)
+    return action
+}
+
+export const deletePayment = (id, category) => {
+    const action = {
+        type: DELETE_PAYMENT,
+        id,
+        category
+
+    }
+    // console.log(action.id)
     return action
 }

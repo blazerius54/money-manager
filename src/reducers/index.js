@@ -1,4 +1,4 @@
-import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_DATE } from '../const/index';
+import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT } from '../const/index';
 
 export function reducer(state = [], action) {
     switch (action.type) {
@@ -13,7 +13,7 @@ export function reducer(state = [], action) {
                 ],
             };
         case ADD_PAYMENT: 
-            console.log('reducer', action);
+            // console.log('reducer', action);
             // Сашин вариант 
               return {
                     categories:[
@@ -32,33 +32,57 @@ export function reducer(state = [], action) {
                         // state.categories[action.index] = addPayment(state.categories[action.index], action), 
                         ...state.categories.slice(action.index+1),]
                     };
-            case CHANGE_DATE:
-                    // console.log(state.categories[action.category])
+            case CHANGE_PAYMENT:
+                let newPayment = state.categories[action.category].payments.filter((item, index)=>{
+                    return item.id === action.id
+                })[0]
+                let index2 = state.categories[action.category].payments.findIndex(item=>{
+                    return item === newPayment
+                })
+                // console.log(index2)
+                // console.log(action)
                 return {
                     categories: [
                         ...state.categories.slice(0,action.category),
                         state.categories[action.category] = {
                             ...state.categories[action.category],
                             payments: [
-                                ...state.categories[action.category].payments.slice(0, action.index),
-                                state.categories[action.category].payments[action.index] = 
-                                // {
-                                //         categoryName: 'apartment',
-                                //         paymentText: action.paymentText,
-                                //         paymentAmount: action.paymentAmount,
-                                //         date: action.date
-                                    
-                                // }, 
-                                action.payment,
-                                ...state.categories[action.category].payments.slice(action.index+1) 
+                                ...state.categories[action.category].payments.slice(0, index2),
+                                state.categories[action.category].payments[index2] = foo( state.categories[action.category].payments[index2], action),
+                                ...state.categories[action.category].payments.slice(index2+1) 
                             ]
                         },
                         ...state.categories.slice(action.category+1),
                     ]    
                 }
+                // return state
+            case DELETE_PAYMENT: 
+                // console.log(state.categories[action.category].payments)
+                return {
+                    categories: [
+                        ...state.categories.slice(0,action.category),
+                        state.categories[action.category] = {
+                            ...state.categories[action.category],
+                            payments: state.categories[action.category].payments.filter(item=>{
+                                return item.id !== action.id
+                            })
+                        },
+                        ...state.categories.slice(action.category+1),
+                    ]  
+                }
         default:
             return state;
     }
+}
+
+function foo (state = [], action) {
+    // console.log(action.payment)
+    // if(!action.payment.paymentText || !action.payment.paymentAmount || !action.payment.date) {
+    //     return state
+    // } else {
+        let newState = action.payment
+        return newState
+    // }
 }
 
 function addPayment (state = [], action) {
