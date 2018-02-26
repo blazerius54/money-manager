@@ -1,75 +1,88 @@
 import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT } from '../const/index';
+import { bake_cookie, read_cookie } from 'sfcookies';
 
-export function reducer(state = [], action) {
+export function reducer(state = [], action) {4
+    let newState = null;
+    if(read_cookie('categories').categories) {
+        console.log('yep')
+        state = read_cookie('categories');
+    }
     switch (action.type) {
         case INCREMENT_SPENT:
             // console.log('reducer', action);
-            return {
-
+            // state.categories = read_cookie('categories')
+            newState = {
+            
                 categories: [
                     ...state.categories.slice(0, action.index),
                     state.categories[action.index] = addText(state.categories[action.index], action),
                     ...state.categories.slice(action.index + 1)
                 ],
             };
+            // bake_cookie('categories', newState);            
+            return newState;
         case ADD_PAYMENT: 
             // console.log('reducer', action);
             // Сашин вариант 
-              return {
-                    categories:[
-                        ...state.categories.slice(0, action.index),
-                        Object.assign(
-                            {},
-                            state.categories[action.index],
-                            {
-                                payments: [
-                                    ...state.categories[action.index].payments,
-                                    action.payment
-                                ]
-                            } 
-                        ),
-                        // кривой вариант
-                        // state.categories[action.index] = addPayment(state.categories[action.index], action), 
-                        ...state.categories.slice(action.index+1),]
-                    };
-            case CHANGE_PAYMENT:
-                let newPayment = state.categories[action.category].payments.filter((item, index)=>{
-                    return item.id === action.id
-                })[0]
-                let index2 = state.categories[action.category].payments.findIndex(item=>{
-                    return item === newPayment
-                })
-                // console.log(index2)
-                // console.log(action)
-                return {
-                    categories: [
-                        ...state.categories.slice(0,action.category),
-                        state.categories[action.category] = {
-                            ...state.categories[action.category],
+            newState = {
+                categories:[
+                    ...state.categories.slice(0, action.index),
+                    Object.assign(
+                        {},
+                        state.categories[action.index],
+                        {
                             payments: [
-                                ...state.categories[action.category].payments.slice(0, index2),
-                                state.categories[action.category].payments[index2] = foo( state.categories[action.category].payments[index2], action),
-                                ...state.categories[action.category].payments.slice(index2+1) 
+                                ...state.categories[action.index].payments,
+                                action.payment
                             ]
-                        },
-                        ...state.categories.slice(action.category+1),
-                    ]    
-                }
-                // return state
-            case DELETE_PAYMENT: 
-                // console.log(state.categories[action.category].payments)
-                return {
-                    categories: [
-                        ...state.categories.slice(0,action.category),
-                        state.categories[action.category] = {
-                            ...state.categories[action.category],
-                            payments: state.categories[action.category].payments.filter(item=>{
-                                return item.id !== action.id
-                            })
-                        },
-                        ...state.categories.slice(action.category+1),
-                    ]  
-                }
+                        } 
+                    ),
+                    // кривой вариант
+                    // state.categories[action.index] = addPayment(state.categories[action.index], action), 
+                    ...state.categories.slice(action.index+1),]
+                };
+            // bake_cookie('categories', newState)                
+            return newState;
+        case CHANGE_PAYMENT:
+            let newPayment = state.categories[action.category].payments.filter((item, index)=>{
+                return item.id === action.id
+            })[0]
+            let index2 = state.categories[action.category].payments.findIndex(item=>{
+                return item === newPayment
+            })
+            // console.log(index2)
+            console.log(action.payment)
+            return {
+                categories: [
+                    ...state.categories.slice(0,action.category),
+                    state.categories[action.category] = {
+                        ...state.categories[action.category],
+                        payments: [
+                            ...state.categories[action.category].payments.slice(0, index2),
+                            state.categories[action.category].payments[index2] = foo( state.categories[action.category].payments[index2], action),
+                            ...state.categories[action.category].payments.slice(index2+1) 
+                        ]
+                    },
+                    ...state.categories.slice(action.category+1),
+                ]    
+            }
+            // return state
+        case DELETE_PAYMENT: 
+            // console.log(state.categories[action.category].payments)
+            newState = {
+                categories: [
+                    ...state.categories.slice(0,action.category),
+                    state.categories[action.category] = {
+                        ...state.categories[action.category],
+                        payments: state.categories[action.category].payments.filter(item=>{
+                            return item.id !== action.id
+                        })
+                    },
+                    ...state.categories.slice(action.category+1),
+                ]  
+            }
+            // bake_cookie('categories', newState);            
+            return newState;
         default:
             return state;
     }

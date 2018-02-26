@@ -16,6 +16,7 @@ export const addPayment = (text, amount, index) => {
         type: ADD_PAYMENT, 
         index,
         payment: {
+            id: Math.random(),
             paymentText: text,
             paymentAmount: amount,
             date: new Date()
@@ -37,7 +38,7 @@ export const changePayment = (text, amount, date, category, index, id) => {
             paymentText: text,
             paymentAmount: amount,
             date,
-            
+            id: Math.random()            
         }
     }
     return action

@@ -49,7 +49,7 @@ class Payment extends Component {
     handleEditDate () {
         this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.index, this.props.i, this.props.item.id)
         this.setState({
-            // text: '',
+            text: '',
             // amount: 0,
             // date: null,
             isEditing: false,

@@ -8,7 +8,7 @@ class Main extends Component {
         super(props);
         this.state = {
             month: 0,
-            categories: []
+            // categories: []
         }
     }
 
@@ -44,12 +44,11 @@ class Main extends Component {
 
     render () {
 
-        // console.log(arr)
-
-        let totalSpent = this.props.categories.reduce((a, b)=>{
-            return a.spent + b.spent
+        let totalSpent = 0;
+        this.props.categories.forEach((item)=>{
+            totalSpent+=item.spent;
         })
-        
+    
         let monthSpent = 0;
         let prevCat = '';
 
@@ -74,11 +73,11 @@ class Main extends Component {
                             this.props.categories.map((item2, index)=>{
                                 let prevCat = '';
                                 return item2.payments.filter(item=>{
-                                    // console.log(item2)
                                     let date = item.date;
                                     date = new Date(date).getMonth();
                                     if(date === this.state.month){
-                                        return item2
+                                        // return item2
+                                        return item
                                     }
                                 }).map((item, i)=>{
                                     if(prevCat !== item2.name) {

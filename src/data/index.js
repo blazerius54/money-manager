@@ -77,6 +77,37 @@ const categories = [
             }, 
             
         ]
+    },
+    {   
+        path: 'car',
+        name :"Машина",
+        spent : 0,
+        text: 'text',
+        payments: [
+            {   
+                id: 9,   
+                categoryName: 'car',
+                paymentText: 'Бензин',
+                paymentAmount: 50,
+                date: 'Jan 5 2018 11:00:19 GMT+0700 (RTZ 6 (зима))'
+            },
+            {   
+                id: 10,   
+                categoryName: 'car',
+                paymentText: 'Дворник',
+                paymentAmount: 25,
+                date: 'Feb 15 2018 11:00:19 GMT+0700 (RTZ 6 (зима))'
+            },
+            {   
+                id: 11,   
+                categoryName: 'car',
+                paymentText: 'Ремень генератора',
+                paymentAmount: 100,
+                date: 'Mar 2 2018 11:00:19 GMT+0700 (RTZ 6 (зима))'
+            }, 
+            
+            
+        ]
     }
 ]
 

@@ -11,6 +11,8 @@ class SubMain extends Component {
     constructor (props) {
         super(props);
         this.state = {
+            isFiltred: false,
+            month: null,
             paymentText: '',
             paymentAmount: 0
         }
@@ -59,19 +61,18 @@ class SubMain extends Component {
                             let date1 = new Date(a.date);
                             let date2 = new Date(b.date);
                             return date1 - date2;
+                        }).filter(item=>{
+                            // console.log(item2)
+                            let date = item.date;
+                            date = new Date(date).getMonth();
+                            if(this.state.month !==null) {
+                                return date === this.state.month
+                            } else {
+                                return item
+                            }
                         }).map((item, i)=>{
                             return (
                                 <Payment key={i} item={item} index={index} i={i} categ={categ} {...this.props}/>
-                                // <li key={index} className='payment-container'>
-                                //         <div>
-                                //             <p>{item.paymentText}: {item.paymentAmount}</p>
-                                //         </div>
-                                //         <div>
-                                //             <p>{moment(new Date(item.date)).format("Do MMM YYYY")}</p>
-                                //         </div>
-                                //         {/* {(new Date(item.date).toString())} */}
-                                //         {/* {item.date.getMonth().toString()} */}
-                                // </li>
                             )
                         })
                     }
@@ -94,6 +95,12 @@ class SubMain extends Component {
                         <input type="submit" />
 
                     </form>
+                </div>
+                <div>
+                    <p onClick={()=>this.setState({month: null})}>За весь год</p>
+                    <p onClick={()=>this.setState({month:0})}>Январь</p>
+                    <p onClick={()=>this.setState({month:1})}>Февраль</p>
+                    <p onClick={()=>this.setState({month:2})}>Март</p>
                 </div>
             </div>
         )
