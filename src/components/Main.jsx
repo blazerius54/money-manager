@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Categ from './Categ';
 import Payment from './Payment';
+import Incomes from './Incomes';
 
 class Main extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            month: 0,
+            month: new Date(Date.now()).getMonth(),
             // categories: []
         }
     }
@@ -50,22 +51,24 @@ class Main extends Component {
         })
     
         let monthSpent = 0;
-        let prevCat = '';
 
         return (
             <div>
 
                 <h2>I`m Main</h2>
-                {
-                    this.props.categories.map((categ, index) => {
-                        return (
-                            <Categ key={index} index={index} categ={categ} {...this.props} />
-                        )
-                    })
-                }
+                <div>
+                    <ul className='categ-container'>
+                    {
+                        this.props.categories.map((categ, index) => {
+                            return (
+                                <Categ key={index} index={index} categ={categ} {...this.props} />
+                            )
+                        })
+                    }
+                    </ul>
+                    <p>{totalSpent}</p>
 
-                <p>{totalSpent}</p>
-
+                </div>  
                 <div>
                     <ul className='payments-container'>
                         {
@@ -80,6 +83,7 @@ class Main extends Component {
                                         return item
                                     }
                                 }).map((item, i)=>{
+                                    monthSpent+=item.paymentAmount;
                                     if(prevCat !== item2.name) {
                                         prevCat = item2.name;
                                         return (
@@ -95,50 +99,43 @@ class Main extends Component {
                                     }
                                 })
                             })
-                            // this.state.payments.filter((item, i) => {
-                            //     // console.log(date.getMonth())
-                            //     let date = item.date;
-                            //     date = new Date(date).getMonth();
-                            //     return date === this.state.month;
-                            // }).map((item, index) => {
-                            //     monthSpent+=item.paymentAmount;
-                            //     if(prevCat === item.categoryName) {
-                            //         // console.log('Старая категория')
-                            //         prevCat = item.categoryName
-                            //         return (
-                                        
-                                        // <Payment key={index} item={item}  {...this.props} />                                            
-                            //         )
-                            //     } else if (prevCat!==item.categoryName){
-                            //         // console.log(prevCat)
-                            //         prevCat = item.categoryName
-                            //         // console.log(prevCat)
-                            //         return (
-                            //             <div key={index}>
-                            //             <p>{item.categoryName}</p>
-                            //             <Payment  item={item} {...this.props} />  </div>                                          
-                            //         )
-                            //     }
-                            // })
-
                         }
                     </ul>
-                    <select name="" id="" onChange={(e)=>this.changeMonth(e)}>
+                    <select name="" id="" onChange={(e)=>this.changeMonth(e)} defaultValue={this.state.month}>
                         <option value="0">Январь</option>
                         <option value="1">Февраль</option>
                         <option value="2">Март</option>
                     </select>
                     <p>Потрачено за месяц: {monthSpent}</p>
                 </div>
-
+                <div>
+                    <ul className='payments-container'>
+                        {
+                            this.props.incomes.map((item, index)=>{
+                                return (
+                                    <Incomes key={index} item={item} {...this.props}/>
+                                    // <li className='payment-container' key={index}>
+                                        
+                                    //     <div>
+                                    //         <p>{item.paymentText}: {item.paymentAmount}</p>
+                                    //     </div>
+                                    // </li>  
+                                    
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
             </div>
         )
     }
 }
 
 function mapStateToProps (state) {
+    console.log(state)
     return {
-        categories: state.categories
+        incomes: state.incomes,
+        categories: state.categories,
     }
 }
 

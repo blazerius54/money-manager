@@ -12,7 +12,8 @@ class SubMain extends Component {
         super(props);
         this.state = {
             isFiltred: false,
-            month: null,
+            month: new Date(Date.now()).getMonth(),
+            monthSpent: 0,
             paymentText: '',
             paymentAmount: 0
         }
@@ -20,7 +21,7 @@ class SubMain extends Component {
     
 
     handleSubmit (e, index, categ) {
-        this.sendPaymentAmount(index,  this.state.paymentAmount)
+        // this.sendPaymentAmount(index,  this.state.paymentAmount)
         e.preventDefault();
         this.props.addPayment(this.state.paymentText, this.state.paymentAmount, index);
 
@@ -37,15 +38,13 @@ class SubMain extends Component {
         this.props.increment(index, paymentAmount)
     }
 
-
-
     render () {
         const path = this.props.match.params.name;
         const index = this.props.categories.findIndex(item=>{
             return item.path === path
         })
         const categ = this.props.categories[index]
-        
+        let monthSpent = 0;
         // console.log(categ)
         return (
             
@@ -53,7 +52,9 @@ class SubMain extends Component {
                 <h2>I`m sub-main</h2>
                 {/* <Link to='/main'><p>Money Manager</p></Link> */}
                 <p>
-                    {categ.name} {categ.spent}
+                    {categ.name} 
+                    
+                        
                 </p>
                 <ul className='payments-container'>
                     {
@@ -66,17 +67,21 @@ class SubMain extends Component {
                             let date = item.date;
                             date = new Date(date).getMonth();
                             if(this.state.month !==null) {
-                                return date === this.state.month
+                                if(date === this.state.month) {
+                                    return item
+                                }
                             } else {
                                 return item
                             }
                         }).map((item, i)=>{
+                            monthSpent += item.paymentAmount 
                             return (
                                 <Payment key={i} item={item} index={index} i={i} categ={categ} {...this.props}/>
                             )
                         })
                     }
                 </ul>
+                <p>Потрачено за месяц: { monthSpent}</p>
                 {/* <CategItem index={index} categ={categ} {...this.props}/> */}
                 <div className="div-form">
                     <form onSubmit={(e)=>this.handleSubmit(e, index, categ)}>
