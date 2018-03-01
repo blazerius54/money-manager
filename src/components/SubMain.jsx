@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 // import Categ from './Categ';
 import Payment from './Payment';
+import Form from './Form';
 import { bindActionCreators } from 'redux';
 import { increment, addPayment } from '../actions/index';
 // import moment from 'moment';
@@ -19,6 +20,28 @@ class SubMain extends Component {
         }
     }
     
+    onChangeForm (text, amount) {
+        this.setState({
+            paymentText: text,
+            paymentAmount: amount
+        })
+        console.log(this.state)
+    }
+
+    sendFormData (index) {
+        console.log(index)
+        // this.setState({
+        //     paymentText: text,
+        //     paymentAmount: amount
+        // })
+        // console.log(text)
+        this.props.addPayment(this.state.paymentText, this.state.paymentAmount, index);
+        
+        this.setState({
+            paymentText: '',
+            paymentAmount: 0
+        })
+    }
 
     handleSubmit (e, index, categ) {
         // this.sendPaymentAmount(index,  this.state.paymentAmount)
@@ -30,8 +53,8 @@ class SubMain extends Component {
             paymentAmount: 0
         })
         
-        this.paymentText.value = '';
-        this.paymentAmount.value = 0;
+        // this.paymentText.value = '';
+        // this.paymentAmount.value = 0;
     } 
     
     sendPaymentAmount(index, paymentAmount) {
@@ -83,7 +106,7 @@ class SubMain extends Component {
                 </ul>
                 <p>Потрачено за месяц: { monthSpent}</p>
                 {/* <CategItem index={index} categ={categ} {...this.props}/> */}
-                <div className="div-form">
+                {/* <div className="div-form">
                     <form onSubmit={(e)=>this.handleSubmit(e, index, categ)}>
                         <input 
                         ref={(ref=>{this.paymentText = ref})}
@@ -100,7 +123,8 @@ class SubMain extends Component {
                         <input type="submit" />
 
                     </form>
-                </div>
+                </div> */}
+                <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index} categ={categ}/>
                 <div>
                     <p onClick={()=>this.setState({month: null})}>За весь год</p>
                     <p onClick={()=>this.setState({month:0})}>Январь</p>
