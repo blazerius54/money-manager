@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Payment from './Payment';
 
-
 class Categ extends Component {
     render () {
         const { name, path } = this.props.categ;
@@ -39,7 +38,7 @@ class Categ extends Component {
                         let date2 = new Date(b.date);
                         return date1 - date2;
                     }).map((item, i)=>{
-                        return <Payment key={i} item={item} category={this.props.categ}/>
+                        return <Payment key={i} item={item} category={this.props.categ.payments}/>
                     })
                 }
             </div>
