@@ -60,15 +60,13 @@ class Main extends Component {
                                             prevCat = category.name;
                                             return (
                                                 <div key={i}>
-                                                    <Categ key={index} index={index} categ={category} month={this.props.month} />
-                                                    <Payment  item={item} category={index}/>
+                                                    <p>{category.name}</p>
+                                                    <Payment  item={item} index={index} i={i} {...this.props}/>
                                                 </div>
                                             )
                                         } else {
                                             return (
-                                                <div key={i}>
-                                                    <Payment  item={item} category={index}/>
-                                                </div>                                               
+                                                <Payment key={i} item={item} index={index} i={i} {...this.props}/>
                                             )
                                         }
                                     })
