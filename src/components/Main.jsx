@@ -12,6 +12,7 @@ class Main extends Component {
         super(props);
         this.state = {
             month: new Date(Date.now()).getMonth(),
+            isVisible: true
         }
     }
 
@@ -40,38 +41,42 @@ class Main extends Component {
                     <div>
                         <ul className='payments-container'>
                             {
+                                // this.props.categories.map((category, index)=>{
+                                //     let prevCat = '';
+                                //     return category.payments.filter(item=>{
+                                //         let date = item.date;
+                                //         date = new Date(date).getMonth();
+                                //         if(date === this.props.month){
+                                //             return item
+                                //         }
+                                //     }).sort((a, b) => {
+                                //         let date1 = new Date(a.date);
+                                //         let date2 = new Date(b.date);
+                                //         return date1 - date2;
+                                //     }).map((item, i)=>{
+                                //         monthSpent+=item.paymentAmount;
+                                //         if(prevCat !== category.name) {
+                                //             prevCat = category.name;
+                                //             return (
+                                //                 <div key={i}>
+                                                    // <Categ key={index} index={index} categ={category} month={this.props.month}/>
+                                //                     <p onClick={()=>this.setState({isVisible: !this.state.isVisible})}>click</p>
+                                //                     <Payment item={item} category={index}/>
+                                //                 </div>
+                                //             )
+                                //         } else {
+                                //             return (
+                                //                 <div key={i}>
+                                //                     <Payment item={item} category={index}/>
+                                //                 </div>                                               
+                                //             )
+                                //         }
+                                //     })
+                                // })
                                 this.props.categories.map((category, index)=>{
-                                    let prevCat = '';
-                                    let categoryMonthSpent = 0; 
-                                    return category.payments.filter(item=>{
-                                        let date = item.date;
-                                        date = new Date(date).getMonth();
-                                        if(date === this.props.month){
-                                            return item
-                                        }
-                                    }).sort((a, b) => {
-                                        let date1 = new Date(a.date);
-                                        let date2 = new Date(b.date);
-                                        return date1 - date2;
-                                    }).map((item, i)=>{
-                                        monthSpent+=item.paymentAmount;
-                                        categoryMonthSpent+=item.paymentAmount;
-                                        if(prevCat !== category.name) {
-                                            prevCat = category.name;
-                                            return (
-                                                <div key={i}>
-                                                    <Categ key={index} index={index} categ={category} month={this.props.month} />
-                                                    <Payment  item={item} category={index}/>
-                                                </div>
-                                            )
-                                        } else {
-                                            return (
-                                                <div key={i}>
-                                                    <Payment  item={item} category={index}/>
-                                                </div>                                               
-                                            )
-                                        }
-                                    })
+                                    return (
+                                        <Categ key={index} index={index} categ={category} month={this.props.month}/>
+                                    ) 
                                 })
                             }
                         </ul>
