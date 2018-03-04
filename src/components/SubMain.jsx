@@ -68,7 +68,7 @@ class SubMain extends Component {
                         }).map((item, i)=>{
                             monthSpent += item.paymentAmount 
                             return (
-                                <Payment key={i} item={item} index={index} i={i} categ={categ} {...this.props}/>
+                                <Payment key={i} item={item} index={index} i={i} categ={categ}/>
                             )
                         })
                     }

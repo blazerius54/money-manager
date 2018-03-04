@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Categ from './Categ';
 import Payment from './Payment';
-import Income from './Income';
+import Incomes from './Incomes';
 import { bindActionCreators } from 'redux';
 import { changeMonth } from '../actions/index';
 
@@ -40,7 +40,7 @@ class Main extends Component {
                     {
                         this.props.categories.map((categ, index) => {
                             return (
-                                <Categ key={index} index={index} categ={categ} {...this.props} month={this.props.month} />
+                                <Categ key={index} index={index} categ={categ} month={this.props.month} />
                             )
                         })
                     }
@@ -72,12 +72,12 @@ class Main extends Component {
                                             return (
                                                 <div key={i}>
                                                     <p>{category.name}</p>
-                                                    <Payment  item={item} category={index} {...this.props}/>
+                                                    <Payment  item={item} category={index}/>
                                                 </div>
                                             )
                                         } else {
                                             return (
-                                                <Payment key={i} item={item} category={index} {...this.props}/>
+                                                <Payment key={i} item={item} category={index}/>
                                             )
                                         }
                                     })
@@ -104,7 +104,7 @@ class Main extends Component {
                         <p>Потрачено за месяц: {monthSpent}</p>
                         <p>Заработано за месяц: {monthEarned}</p>
                     </div>
-                    <Income incomes={this.props.incomes} month={this.props.month}/>
+                    <Incomes incomes={this.props.incomes} month={this.props.month}/>
 
                 </div>
             </div>
