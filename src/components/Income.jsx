@@ -32,32 +32,33 @@ sendFormData () {
     })
 }
   render() {
-    return (
-      <div>
+    let indexToPass = 0; 
+    return <div>
         <p>Доходы:</p>
         <ul className="payments-container">
-          {this.props.incomes.sort((a, b) => {
-                            let date1 = new Date(a.date);
-                            let date2 = new Date(b.date);
-                            return date1 - date2;
-                        }).filter(item=>{
-                          // console.log(item2)
-                          let date = item.date;
-                          date = new Date(date).getMonth();
-                          if(this.state.month !==null) {
-                              if(date === this.props.month) {
-                                  return item
-                              }
-                          } else {
-                              return item
-                          }
-                      }).map((item, index) => {
-            return <Incomes key={index} item={item} index={index} {...this.props} />;
-          })}
+          {
+            this.props.incomes.sort((a, b) => {
+              let date1 = new Date(a.date);
+              let date2 = new Date(b.date);
+              return date1 - date2;
+            }).filter((item, index) => {
+              indexToPass = index;
+              let date = item.date;
+              date = new Date(date).getMonth();
+              if (this.state.month !== null) {
+                if (date === this.props.month) {
+                  return item;
+                }
+              } else {
+                return item;
+              }
+            }).map((item, index) => {
+              return <Incomes key={index} item={item} {...this.props} sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)}/>;
+            })
+          }
         </ul>
-        <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)}/>
-      </div>
-    );
+        <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} />
+      </div>;
   }
 }
 

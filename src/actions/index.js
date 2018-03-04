@@ -1,5 +1,5 @@
-import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT, 
-        ADD_INCOME, EDIT_INCOME, CHANGE_MONTH } from '../const/index';
+import { CHANGE_MONTH, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT, 
+        ADD_INCOME, EDIT_INCOME, DELETE_INCOME } from '../const/index';
 
 export const changeMonth = (month) => {
     const action = {
@@ -10,19 +10,7 @@ export const changeMonth = (month) => {
     return action
 }
 
-export const increment = (index, amount) => {
-    const action = {
-        type: INCREMENT_SPENT,
-        index,
-        amount,
-        // categ
-    }
-    // console.log('action ', action)
-    return action;
-}
-
 export const addPayment = (text, amount, index) => {
-    console.log(action)
     const action = {
         type: ADD_PAYMENT, 
         index,
@@ -34,15 +22,15 @@ export const addPayment = (text, amount, index) => {
 
         }
     }
+    console.log(action)
     return action    
 }
 
-export const changePayment = (text, amount, date, category, index, id) => {
+export const changePayment = (text, amount, date, category, id) => {
     // console.log(action)
     const action = {
         type: CHANGE_PAYMENT,
         category,
-        index,
         payment: {
             paymentText: text,
             paymentAmount: Number(amount),
@@ -78,18 +66,24 @@ export const addIncome = (text, amount) => {
     return action
 }
 
-export const editIncome = (text, amount, date, index, id) => {
+export const editIncome = (text, amount, date, id) => {
     const action = {
         type: EDIT_INCOME,
-        index,
         income: {
+            id,        
             text,
-            // paymentAmount: Number(amount),
-            amount,
-            date,
-            id        
+            amount: Number(amount),
+            date
         }
     } 
     console.log(action)
+    return action
+}
+
+export const deleteIncome = (id) => {
+    const action = {
+        type: DELETE_INCOME,
+        id
+    }
     return action
 }

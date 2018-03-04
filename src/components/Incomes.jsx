@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { editIncome } from '../actions/index';
+import { editIncome, deleteIncome } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -9,15 +9,16 @@ class Incomes extends Component {
         super (props);
         this.state = {
             isEditing: false,
-            text: '',
-            amount: 0,
-            date: new Date(Date.now()),
         }
     }
 
 
     handleEditIncome () {
-        this.props.editIncome(this.textInput.value, this.amountInput.amount, this.state.date, this.props.index, this.props.item.id)
+        console.log(this.props.item.id)
+        this.props.editIncome(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.item.id)
+        this.setState({
+            isEditing: false
+        })
     }
 
     renderDate () {
@@ -53,20 +54,20 @@ class Incomes extends Component {
                             type='text' 
                             placeholder="text"
                             defaultValue={this.props.item.text}
-                            onChange={(e)=>this.setState({text: e.target.value})}
                             ref={(ref=> {this.textInput = ref})}
                             />
                             <input 
                             type='text' 
                             placeholder="amount"
                             defaultValue={this.props.item.amount}
-                            onChange={(e)=>this.setState({amount: Number(e.target.value)})}
                             ref={(ref=> {this.amountInput = ref})}
                             />
                         </div>
                         :
                         <div>
                             <p>{this.props.item.text}: {this.props.item.amount}</p>
+                            <button onClick={()=>this.props.deleteIncome(this.props.item.id)}>Delete</button>
+                            
                         </div>                         
                     }
                 
@@ -80,7 +81,6 @@ class Incomes extends Component {
                         placeholder="date"
                         id='datePicker'
                         defaultValue={dafaultDate}
-                        onChange={(e)=>this.setState({date: e.target.value})}
                         ref={(ref=> {this.dateInput = ref})}
                         />
                         <button
@@ -104,9 +104,8 @@ class Incomes extends Component {
     }
 }
 
-// export default Incomes
 function mapDispatchToProps (dispatch) {
-    return bindActionCreators({ editIncome }, dispatch)
+    return bindActionCreators({ editIncome, deleteIncome }, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(Incomes)

@@ -3,15 +3,13 @@ import { connect } from 'react-redux';
 import Payment from './Payment';
 import Form from './Form';
 import { bindActionCreators } from 'redux';
-import { increment, addPayment, changeMonth } from '../actions/index';
+import { addPayment, changeMonth } from '../actions/index';
 // import moment from 'moment';
 
 class SubMain extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            isFiltred: false,
-            monthSpent: 0,
             paymentText: '',
             paymentAmount: 0
         }
@@ -47,11 +45,8 @@ class SubMain extends Component {
             
             <div>
                 <h2>I`m sub-main</h2>
-                {/* <Link to='/main'><p>Money Manager</p></Link> */}
                 <p>
                     {categ.name} 
-                    
-                        
                 </p>
                 <ul className='payments-container'>
                     {
@@ -104,7 +99,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-    return bindActionCreators({ increment, addPayment, changeMonth }, dispatch)
+    return bindActionCreators({ addPayment, changeMonth }, dispatch)
 }
 
 

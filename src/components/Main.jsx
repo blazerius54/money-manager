@@ -14,22 +14,6 @@ class Main extends Component {
         }
     }
 
-    componentDidMount () {
-        let arr = [];
-
-        arr = this.props.categories.map((item, index) => {
-           return item.payments.sort((a, b) => {
-                let date1 = new Date(a.date);
-                let date2 = new Date(b.date);
-                return date1 - date2;
-            })
-        });
-
-        this.setState({
-            payments: arr
-        })
-    }
-
     render () {
 
         // let totalSpent = 0;
@@ -42,9 +26,9 @@ class Main extends Component {
         this.props.incomes.filter(item=>{
             let date = item.date;
             date = new Date(date).getMonth();
-            if(date === this.props.month){
-                // return item2
-                return item}
+                if(date === this.props.month){
+                    return item
+                }
             }).forEach(item=>monthEarned += item.amount);
 
         return (
@@ -69,28 +53,31 @@ class Main extends Component {
                         <ul className='payments-container'>
                             {
     
-                                this.props.categories.map((item2, index)=>{
+                                this.props.categories.map((category, index)=>{
                                     let prevCat = '';
-                                    return item2.payments.filter(item=>{
+                                    return category.payments.filter(item=>{
                                         let date = item.date;
                                         date = new Date(date).getMonth();
                                         if(date === this.props.month){
-                                            // return item2
                                             return item
                                         }
+                                    }).sort((a, b) => {
+                                        let date1 = new Date(a.date);
+                                        let date2 = new Date(b.date);
+                                        return date1 - date2;
                                     }).map((item, i)=>{
                                         monthSpent+=item.paymentAmount;
-                                        if(prevCat !== item2.name) {
-                                            prevCat = item2.name;
+                                        if(prevCat !== category.name) {
+                                            prevCat = category.name;
                                             return (
                                                 <div key={i}>
-                                                    <p>{item2.name}</p>
-                                                    <Payment  item={item} index={index} i={i} {...this.props}/>
+                                                    <p>{category.name}</p>
+                                                    <Payment  item={item} category={index} {...this.props}/>
                                                 </div>
                                             )
                                         } else {
                                             return (
-                                                <Payment key={i} item={item} index={index} i={i} {...this.props}/>
+                                                <Payment key={i} item={item} category={index} {...this.props}/>
                                             )
                                         }
                                     })

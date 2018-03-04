@@ -17,36 +17,8 @@ class Payment extends Component {
         }
     }
 
-    // componentDidMount () {
-    //     this.setState({
-    //         text: this.props.item.paymentText,
-    //         amount: this.props.item.paymentAmount,
-    //         date: this.props.item.date
-    //     })
-
-    //     console.log(this.state)
-    // }
-
-    renderDate () {
-        if(this.state.isEditing === true){
-            return (
-                <input
-                type="datetime-local" 
-                placeholder='date' 
-                onClick={()=>this.setState({isEditing: !this.state.isEditing})}/>
-            ) 
-       } else {
-            return (
-                <p 
-                onClick={()=>this.setState({isEditing: true})}>
-                    {moment(new Date(this.props.item.date)).format("Do MMM YYYY")}
-                </p>
-            )
-        }                      
-    }
-
     handleEditDate () {
-        this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.index, this.props.i, this.props.item.id)
+        this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.category, this.props.item.id)
         this.setState({
             text: '',
             // amount: 0,
@@ -54,10 +26,7 @@ class Payment extends Component {
             isEditing: false,
             // xx: '2018-02-03'
         });
-        // console.log(this.props.index)
-        // this.textInput.value = '';
-        // this.amountInput.value = '';
-        // this.dateInput.value = '';
+
     }
 
     render () {
@@ -93,7 +62,6 @@ class Payment extends Component {
                     }
                 
               <div>
-                {/* {this.renderDate()} */}
                 {
                     this.state.isEditing === true ? 
                     <div>
@@ -121,21 +89,12 @@ class Payment extends Component {
                     </p>
                 }
               </div>
-              {/* {(new Date(item.date).toString())} */}
-              {/* {item.date.getMonth().toString()} */}
             </li>
         )
     }
 }
 
-// function mapStateToProps (state) {
-//     return {
-//         categories: state.categories
-//     }
-// }
-
 function mapDispatchToProps (dispatch) {
     return bindActionCreators({ changePayment, deletePayment }, dispatch)
 }
 export default connect(null, mapDispatchToProps)(Payment);
-// export default Payment;
