@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Categ from './Categ';
 import Payment from './Payment';
-import Incomes from './Incomes';
+import Income from './Income';
+import { bindActionCreators } from 'redux';
+import { changeMonth } from '../actions/index';
 
 class Main extends Component {
     constructor (props) {
         super(props);
         this.state = {
             month: new Date(Date.now()).getMonth(),
-            // categories: []
         }
     }
-
-
 
     componentDidMount () {
         let arr = [];
@@ -26,105 +25,100 @@ class Main extends Component {
             })
         });
 
-        
-        
-
-        
         this.setState({
             payments: arr
         })
     }
 
-
-    
-    changeMonth (e) {
-        this.setState({
-            month: Number(e.target.value),
-        })
-    }
-
     render () {
 
-        let totalSpent = 0;
-        this.props.categories.forEach((item)=>{
-            totalSpent+=item.spent;
-        })
+        // let totalSpent = 0;
+        // this.props.categories.forEach((item)=>{
+        //     totalSpent+=item.spent;
+        // })
     
         let monthSpent = 0;
+        let monthEarned = 0;
+        this.props.incomes.filter(item=>{
+            let date = item.date;
+            date = new Date(date).getMonth();
+            if(date === this.props.month){
+                // return item2
+                return item}
+            }).forEach(item=>monthEarned += item.amount);
 
         return (
             <div>
 
                 <h2>I`m Main</h2>
-                <div>
+                <header>
                     <ul className='categ-container'>
                     {
                         this.props.categories.map((categ, index) => {
                             return (
-                                <Categ key={index} index={index} categ={categ} {...this.props} />
+                                <Categ key={index} index={index} categ={categ} {...this.props} month={this.props.month} />
                             )
                         })
                     }
                     </ul>
-                    <p>{totalSpent}</p>
+                    {/* <p>{totalSpent}</p> */}
 
-                </div>  
-                <div>
-                    <ul className='payments-container'>
-                        {
-
-                            this.props.categories.map((item2, index)=>{
-                                let prevCat = '';
-                                return item2.payments.filter(item=>{
-                                    let date = item.date;
-                                    date = new Date(date).getMonth();
-                                    if(date === this.state.month){
-                                        // return item2
-                                        return item
-                                    }
-                                }).map((item, i)=>{
-                                    monthSpent+=item.paymentAmount;
-                                    if(prevCat !== item2.name) {
-                                        prevCat = item2.name;
-                                        return (
-                                            <div key={i}>
-                                                <p>{item2.name}</p>
-                                                <Payment  item={item} index={index} i={i} {...this.props}/>
-                                            </div>
-                                        )
-                                    } else {
-                                        return (
-                                            <Payment key={i} item={item} index={index} i={i} {...this.props}/>
-                                        )
-                                    }
+                </header>  
+                <div className='main-content'>
+                    <div>
+                        <ul className='payments-container'>
+                            {
+    
+                                this.props.categories.map((item2, index)=>{
+                                    let prevCat = '';
+                                    return item2.payments.filter(item=>{
+                                        let date = item.date;
+                                        date = new Date(date).getMonth();
+                                        if(date === this.props.month){
+                                            // return item2
+                                            return item
+                                        }
+                                    }).map((item, i)=>{
+                                        monthSpent+=item.paymentAmount;
+                                        if(prevCat !== item2.name) {
+                                            prevCat = item2.name;
+                                            return (
+                                                <div key={i}>
+                                                    <p>{item2.name}</p>
+                                                    <Payment  item={item} index={index} i={i} {...this.props}/>
+                                                </div>
+                                            )
+                                        } else {
+                                            return (
+                                                <Payment key={i} item={item} index={index} i={i} {...this.props}/>
+                                            )
+                                        }
+                                    })
                                 })
-                            })
-                        }
-                    </ul>
-                    <select name="" id="" onChange={(e)=>this.changeMonth(e)} defaultValue={this.state.month}>
-                        <option value="0">Январь</option>
-                        <option value="1">Февраль</option>
-                        <option value="2">Март</option>
-                    </select>
-                    <p>Потрачено за месяц: {monthSpent}</p>
-                </div>
-                <div>
-                    <ul className='payments-container'>
-                        {
-                            this.props.incomes.map((item, index)=>{
-                                return (
-                                    <Incomes key={index} item={item} {...this.props}/>
-                                    // <li className='payment-container' key={index}>
-                                        
-                                    //     <div>
-                                    //         <p>{item.paymentText}: {item.paymentAmount}</p>
-                                    //     </div>
-                                    // </li>  
-                                    
-                                )
-                            })
-                        }
-                    </ul>
+                            }
+                        </ul>
+                        
+                    </div>
+                    <div className="month-spent">
+                        {/* <select name="" id="" 
+                            onChange={(e)=>this.setState({month: Number(e.target.value)})}
+                            defaultValue={this.state.month}>
+                            <option value="0">Январь</option>
+                            <option value="1">Февраль</option>
+                            <option value="2">Март</option>
+                        </select> */}
+                        <select name="" id="" 
+                            onChange={(e)=>this.props.changeMonth(Number(e.target.value))}
+                            defaultValue={this.props.month}>
+                            <option value="0">Январь</option>
+                            <option value="1">Февраль</option>
+                            <option value="2">Март</option>
+                        </select>
+                        <p>Потрачено за месяц: {monthSpent}</p>
+                        <p>Заработано за месяц: {monthEarned}</p>
+                    </div>
+                    <Income incomes={this.props.incomes} month={this.props.month}/>
+
                 </div>
             </div>
         )
@@ -132,11 +126,16 @@ class Main extends Component {
 }
 
 function mapStateToProps (state) {
-    console.log(state)
     return {
         incomes: state.incomes,
         categories: state.categories,
+        month: state.month,
     }
 }
 
-export default connect(mapStateToProps)(Main);
+function mapDispatchToProps (dispatch) {
+    return bindActionCreators({ changeMonth }, dispatch)
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

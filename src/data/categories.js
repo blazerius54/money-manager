@@ -1,3 +1,5 @@
+export let month = new Date(Date.now()).getMonth();
+
 let categories = [
     {   
         path: 'food',

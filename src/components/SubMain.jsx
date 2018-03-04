@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
-// import Categ from './Categ';
 import Payment from './Payment';
 import Form from './Form';
 import { bindActionCreators } from 'redux';
-import { increment, addPayment } from '../actions/index';
+import { increment, addPayment, changeMonth } from '../actions/index';
 // import moment from 'moment';
 
 class SubMain extends Component {
@@ -13,7 +11,6 @@ class SubMain extends Component {
         super(props);
         this.state = {
             isFiltred: false,
-            month: new Date(Date.now()).getMonth(),
             monthSpent: 0,
             paymentText: '',
             paymentAmount: 0
@@ -25,16 +22,10 @@ class SubMain extends Component {
             paymentText: text,
             paymentAmount: amount
         })
-        console.log(this.state)
+        // console.log(this.state)
     }
 
     sendFormData (index) {
-        console.log(index)
-        // this.setState({
-        //     paymentText: text,
-        //     paymentAmount: amount
-        // })
-        // console.log(text)
         this.props.addPayment(this.state.paymentText, this.state.paymentAmount, index);
         
         this.setState({
@@ -43,23 +34,6 @@ class SubMain extends Component {
         })
     }
 
-    handleSubmit (e, index, categ) {
-        // this.sendPaymentAmount(index,  this.state.paymentAmount)
-        e.preventDefault();
-        this.props.addPayment(this.state.paymentText, this.state.paymentAmount, index);
-
-        this.setState({
-            paymentText: '',
-            paymentAmount: 0
-        })
-        
-        // this.paymentText.value = '';
-        // this.paymentAmount.value = 0;
-    } 
-    
-    sendPaymentAmount(index, paymentAmount) {
-        this.props.increment(index, paymentAmount)
-    }
 
     render () {
         const path = this.props.match.params.name;
@@ -90,7 +64,7 @@ class SubMain extends Component {
                             let date = item.date;
                             date = new Date(date).getMonth();
                             if(this.state.month !==null) {
-                                if(date === this.state.month) {
+                                if(date === this.props.month) {
                                     return item
                                 }
                             } else {
@@ -105,31 +79,17 @@ class SubMain extends Component {
                     }
                 </ul>
                 <p>Потрачено за месяц: { monthSpent}</p>
-                {/* <CategItem index={index} categ={categ} {...this.props}/> */}
-                {/* <div className="div-form">
-                    <form onSubmit={(e)=>this.handleSubmit(e, index, categ)}>
-                        <input 
-                        ref={(ref=>{this.paymentText = ref})}
-                        type="text"
-                        placeholder='Text'
-                        onChange={(e)=>{this.setState({paymentText: e.target.value})}}
-                        />
-                        <input 
-                        ref={(ref=>{this.paymentAmount = ref})}
-                        type="text"
-                        placeholder='Payment'
-                        onChange={(e)=>{this.setState({paymentAmount: Number(e.target.value)})}}
-                        />
-                        <input type="submit" />
 
-                    </form>
-                </div> */}
-                <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index} categ={categ}/>
+                <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index}/>
+                
                 <div>
-                    <p onClick={()=>this.setState({month: null})}>За весь год</p>
-                    <p onClick={()=>this.setState({month:0})}>Январь</p>
-                    <p onClick={()=>this.setState({month:1})}>Февраль</p>
-                    <p onClick={()=>this.setState({month:2})}>Март</p>
+                    <select name="" id="" 
+                        onChange={(e)=>this.props.changeMonth(Number(e.target.value))}
+                        defaultValue={this.props.month}>
+                        <option value="0">Январь</option>
+                        <option value="1">Февраль</option>
+                        <option value="2">Март</option>
+                    </select>
                 </div>
             </div>
         )
@@ -138,12 +98,13 @@ class SubMain extends Component {
 
 function mapStateToProps (state) {
     return {
-        categories: state.categories
+        categories: state.categories,
+        month: state.month
     } 
 }
 
 function mapDispatchToProps (dispatch) {
-    return bindActionCreators({ increment, addPayment }, dispatch)
+    return bindActionCreators({ increment, addPayment, changeMonth }, dispatch)
 }
 
 

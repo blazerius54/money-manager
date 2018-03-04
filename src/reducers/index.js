@@ -1,13 +1,22 @@
-import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT } from '../const/index';
+import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT, ADD_INCOME, CHANGE_MONTH } from '../const/index';
 import { bake_cookie, read_cookie } from 'sfcookies';
 
 export function reducer(state = [], action) {
     let newState = null;
     if(read_cookie('categories').categories) {
-        console.log('yep')
         state = read_cookie('categories');
     }
     switch (action.type) {
+        case CHANGE_MONTH:
+            console.log(action)      
+            newState = {
+                ...state,
+                month: action.month
+            }
+            console.log(newState)
+            bake_cookie('categories', newState);            
+            
+            return newState;
         case INCREMENT_SPENT:
             newState = {
                 ...state,
@@ -20,7 +29,8 @@ export function reducer(state = [], action) {
             bake_cookie('categories', newState);            
             return newState;
         case ADD_PAYMENT: 
-            // Сашин вариант 
+            // Сашин вариант
+            console.log(action) 
             newState = {
                 ...state,
                 categories:[
@@ -62,9 +72,10 @@ export function reducer(state = [], action) {
             bake_cookie('categories', newState)                            
             return newState
         case DELETE_PAYMENT: 
-            // console.log(state.categories[action.category].payments)
+            console.log(action, state);
             newState = {
                 ...state,
+                month: state.month,                
                 categories: [
                     ...state.categories.slice(0,action.category),
                     state.categories[action.category] = {
@@ -76,8 +87,19 @@ export function reducer(state = [], action) {
                     ...state.categories.slice(action.category+1),
                 ]  
             }
-            bake_cookie('categories', newState);            
+            bake_cookie('categories', newState);  
+            console.log(newState)          
             return newState;
+        case ADD_INCOME: 
+            newState = {
+                ...state,
+                incomes: [
+                    ...state.incomes,
+                    action.income
+                ]
+            }
+            bake_cookie('categories', newState);                        
+            return newState
         default:
             return state;
     }

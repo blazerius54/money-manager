@@ -1,4 +1,14 @@
-import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT, ADD_INCOME } from '../const/index';
+import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT, 
+        ADD_INCOME, EDIT_INCOME, CHANGE_MONTH } from '../const/index';
+
+export const changeMonth = (month) => {
+    const action = {
+        type: CHANGE_MONTH,
+        month
+    }
+    console.log(action)
+    return action
+}
 
 export const increment = (index, amount) => {
     const action = {
@@ -12,13 +22,14 @@ export const increment = (index, amount) => {
 }
 
 export const addPayment = (text, amount, index) => {
+    console.log(action)
     const action = {
         type: ADD_PAYMENT, 
         index,
         payment: {
             id: Math.random(),
             paymentText: text,
-            paymentAmount: amount,
+            paymentAmount: Number(amount),
             date: new Date()
 
         }
@@ -39,7 +50,6 @@ export const changePayment = (text, amount, date, category, index, id) => {
             id            
         }
     }
-    // console.log('action ', action)
     
     return action
 }
@@ -51,20 +61,35 @@ export const deletePayment = (id, category) => {
         category
 
     }
-    // console.log(action.id)
     return action
 }
 
-export const addIncome = (payment) => {
+export const addIncome = (text, amount) => {
     const action = {
         type: ADD_INCOME,
         income: {
             id: Math.random(),
-            incomeText: payment.text,
-            incomeAmount: payment.amount,
+            text,
+            amount: Number(amount),
             date: new Date()
         }    
     }
+    console.log(action)
+    return action
+}
+
+export const editIncome = (text, amount, date, index, id) => {
+    const action = {
+        type: EDIT_INCOME,
+        index,
+        income: {
+            text,
+            // paymentAmount: Number(amount),
+            amount,
+            date,
+            id        
+        }
+    } 
     console.log(action)
     return action
 }

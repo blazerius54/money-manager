@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import moment from 'moment';
-import { addIncome } from '../actions/index';
+import { editIncome } from '../actions/index';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 
 class Incomes extends Component {
     constructor (props) {
@@ -13,11 +12,13 @@ class Incomes extends Component {
             text: '',
             amount: 0,
             date: new Date(Date.now()),
-            // newPayment
         }
     }
 
 
+    handleEditIncome () {
+        this.props.editIncome(this.textInput.value, this.amountInput.amount, this.state.date, this.props.index, this.props.item.id)
+    }
 
     renderDate () {
         if(this.state.isEditing === true){
@@ -39,7 +40,6 @@ class Incomes extends Component {
 
 
     render () {
-        console.log(this.props)
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
         return <div>
@@ -52,22 +52,21 @@ class Incomes extends Component {
                             <input 
                             type='text' 
                             placeholder="text"
-                            defaultValue={this.props.item.incomeText}
+                            defaultValue={this.props.item.text}
                             onChange={(e)=>this.setState({text: e.target.value})}
                             ref={(ref=> {this.textInput = ref})}
                             />
                             <input 
                             type='text' 
                             placeholder="amount"
-                            defaultValue={this.props.item.incomeAmount}
+                            defaultValue={this.props.item.amount}
                             onChange={(e)=>this.setState({amount: Number(e.target.value)})}
                             ref={(ref=> {this.amountInput = ref})}
                             />
                         </div>
                         :
                         <div>
-                            <p>{this.props.item.incomeText}: {this.props.item.incomeAmount}</p>
-                            {/* <button onClick={()=>this.props.deletePayment(this.props.item.id, this.props.index)}>Delete</button> */}
+                            <p>{this.props.item.text}: {this.props.item.amount}</p>
                         </div>                         
                     }
                 
@@ -85,7 +84,7 @@ class Incomes extends Component {
                         ref={(ref=> {this.dateInput = ref})}
                         />
                         <button
-                        onClick={() => this.handleEditDate()} 
+                        onClick={() => this.handleEditIncome()} 
                         >save</button>
                     </div>
                     : 
@@ -100,17 +99,14 @@ class Incomes extends Component {
                     </p>
                 }
               </div>
-              {/* {(new Date(item.date).toString())} */}
-              {/* {item.date.getMonth().toString()} */}
             </li>
           </div>;
     }
 }
 
-
-
+// export default Incomes
 function mapDispatchToProps (dispatch) {
-    return bindActionCreators({ addIncome }, dispatch)
+    return bindActionCreators({ editIncome }, dispatch)
 }
-export default connect(null, mapDispatchToProps)(Incomes);
-// export default Incomes;
+
+export default connect(null, mapDispatchToProps)(Incomes)

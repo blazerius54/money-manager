@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import moment from 'moment';
 import { changePayment, deletePayment } from '../actions/index';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 
@@ -63,10 +63,9 @@ class Payment extends Component {
     render () {
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
-        // console.log(this.props.item.date)
-        return <div>
+        return (
             <li className="payment-container">
-              <div>
+              
                 
                     {
                         this.state.isEditing === true?
@@ -93,7 +92,6 @@ class Payment extends Component {
                         </div>                         
                     }
                 
-              </div>
               <div>
                 {/* {this.renderDate()} */}
                 {
@@ -126,7 +124,7 @@ class Payment extends Component {
               {/* {(new Date(item.date).toString())} */}
               {/* {item.date.getMonth().toString()} */}
             </li>
-          </div>;
+        )
     }
 }
 
