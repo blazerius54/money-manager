@@ -32,7 +32,6 @@ sendFormData () {
     })
 }
   render() {
-    let indexToPass = 0; 
     return <div>
         <p>Доходы:</p>
         <ul className="payments-container">
@@ -42,7 +41,6 @@ sendFormData () {
               let date2 = new Date(b.date);
               return date1 - date2;
             }).filter((item, index) => {
-              indexToPass = index;
               let date = item.date;
               date = new Date(date).getMonth();
               if (this.state.month !== null) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Categ from './Categ';
 import Payment from './Payment';
 import Incomes from './Incomes';
@@ -33,28 +34,15 @@ class Main extends Component {
 
         return (
             <div>
-
-                <h2>I`m Main</h2>
                 <header>
-                    <ul className='categ-container'>
-                    {
-                        this.props.categories.map((categ, index) => {
-                            return (
-                                <Categ key={index} index={index} categ={categ} month={this.props.month} />
-                            )
-                        })
-                    }
-                    </ul>
-                    {/* <p>{totalSpent}</p> */}
-
                 </header>  
                 <div className='main-content'>
                     <div>
                         <ul className='payments-container'>
                             {
-    
                                 this.props.categories.map((category, index)=>{
                                     let prevCat = '';
+                                    let categoryMonthSpent = 0; 
                                     return category.payments.filter(item=>{
                                         let date = item.date;
                                         date = new Date(date).getMonth();
@@ -67,17 +55,20 @@ class Main extends Component {
                                         return date1 - date2;
                                     }).map((item, i)=>{
                                         monthSpent+=item.paymentAmount;
+                                        categoryMonthSpent+=item.paymentAmount;
                                         if(prevCat !== category.name) {
                                             prevCat = category.name;
                                             return (
                                                 <div key={i}>
-                                                    <p>{category.name}</p>
+                                                    <Categ key={index} index={index} categ={category} month={this.props.month} />
                                                     <Payment  item={item} category={index}/>
                                                 </div>
                                             )
                                         } else {
                                             return (
-                                                <Payment key={i} item={item} category={index}/>
+                                                <div key={i}>
+                                                    <Payment  item={item} category={index}/>
+                                                </div>                                               
                                             )
                                         }
                                     })
@@ -100,9 +91,11 @@ class Main extends Component {
                             <option value="0">Январь</option>
                             <option value="1">Февраль</option>
                             <option value="2">Март</option>
+                            <option value="3">Апрель</option>
                         </select>
-                        <p>Потрачено за месяц: {monthSpent}</p>
                         <p>Заработано за месяц: {monthEarned}</p>
+                        <p>Потрачено за месяц: {monthSpent}</p>
+                        <p>Баланс: {monthEarned - monthSpent}</p>
                     </div>
                     <Incomes incomes={this.props.incomes} month={this.props.month}/>
 
@@ -123,6 +116,5 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
     return bindActionCreators({ changeMonth }, dispatch)
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

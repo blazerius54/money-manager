@@ -1,4 +1,4 @@
-import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT, CHANGE_MONTH,
+import { ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT, CHANGE_MONTH,
          ADD_INCOME, EDIT_INCOME, DELETE_INCOME } from '../const/index';
 import { bake_cookie, read_cookie } from 'sfcookies';
 

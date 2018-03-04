@@ -9,7 +9,6 @@ class Categ extends Component {
             let date = item.date;
             date = new Date(date).getMonth();
             if(date === this.props.month){
-                // return item2
                 return item
             }
         }).forEach(item=>{
