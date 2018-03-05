@@ -18,7 +18,7 @@ class Payment extends Component {
     }
 
     handleEditDate () {
-        this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.category, this.props.item.id)
+        this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.categ, this.props.item.id)
         this.setState({
             text: '',
             // amount: 0,
@@ -30,11 +30,11 @@ class Payment extends Component {
     }
 
     render () {
-        console.log(this.props.item.id)
+        // console.log(this.props.item.id)
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
         return (
-            <li className="payment-container">
+            <div className="payment-container">
               
                 
                     {
@@ -58,7 +58,7 @@ class Payment extends Component {
                         :
                         <div>
                             <p>{this.props.item.paymentText}: {this.props.item.paymentAmount}</p>
-                            <button onClick={()=>this.props.deletePayment(this.props.item.id, this.props.category)}>Delete</button>
+                            <button onClick={()=>this.props.deletePayment(this.props.item.id, this.props.categ)}>Delete</button>
                         </div>                         
                     }
                 
@@ -90,7 +90,7 @@ class Payment extends Component {
                     </p>
                 }
               </div>
-            </li>
+            </div>
         )
     }
 }
