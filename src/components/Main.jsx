@@ -61,12 +61,12 @@ class Main extends Component {
                                             return (
                                                 <div key={i}>
                                                     <p>{category.name}</p>
-                                                    <Payment  item={item} index={index} i={i} {...this.props}/>
+                                                    <Payment  item={item} index={index} i={i} category={category} {...this.props}/>
                                                 </div>
                                             )
                                         } else {
                                             return (
-                                                <Payment key={i} item={item} index={index} i={i} {...this.props}/>
+                                                <Payment key={i} item={item} index={index} i={i} category={category} {...this.props}/>
                                             )
                                         }
                                     })
