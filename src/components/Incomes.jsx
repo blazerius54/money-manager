@@ -42,14 +42,13 @@ sendFormData () {
               return date1 - date2;
             }).filter((item, index) => {
               let date = item.date;
-              date = new Date(date).getMonth();
-              if (this.state.month !== null) {
-                if (date === this.props.month) {
-                  return item;
+                let year = new Date(date).getFullYear();
+                let month = new Date(date).getMonth();
+                if(month === new Date(this.props.month).getMonth() &&
+                    year === new Date(this.props.month).getFullYear()
+                ) {
+                    return item
                 }
-              } else {
-                return item;
-              }
             }).map((item, index) => {
               return (
                 <Income 

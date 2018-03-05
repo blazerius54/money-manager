@@ -17,8 +17,8 @@ class Categ extends Component {
             let year = new Date(date).getFullYear();
             let month = new Date(date).getMonth();
 
-            if(month === new Date(this.props.month).getMonth() &&
-                year === new Date(this.props.month).getFullYear()
+            if(month === new Date(this.props.date).getMonth() &&
+                year === new Date(this.props.date).getFullYear()
             ){
                 spent+=item.paymentAmount
             }
@@ -42,8 +42,8 @@ class Categ extends Component {
                             let date = item.date;
                             let year = new Date(date).getFullYear();
                             let month = new Date(date).getMonth();
-                            if(month === new Date(this.props.month).getMonth() &&
-                                year === new Date(this.props.month).getFullYear()
+                            if(month === new Date(this.props.date).getMonth() &&
+                                year === new Date(this.props.date).getFullYear()
                             ){
                                 return item
                             }

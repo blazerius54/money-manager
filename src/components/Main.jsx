@@ -23,17 +23,14 @@ class Main extends Component {
 
         this.props.categories.forEach((item)=>{
             item.payments.filter(item=>{
-                // let date = item.date;
-                // // let date2 = new Date(date).getFullYear() + ' ' + new Date(date).getMonth()
-                // // console.log(date2)
-                // let year = new Date(date).getFullYear();
-                // let month = new Date(date).getMonth();
-
-                // // console.log(new Date(this.props.month).getMonth())
-                // console.log(month)
-                // if(month === new Date(this.props.month).getMonth()){
-                //     return item
-                // }
+                let date = item.date;
+                let year = new Date(date).getFullYear();
+                let month = new Date(date).getMonth();
+                if(month === new Date(this.props.month).getMonth() &&
+                    year === new Date(this.props.month).getFullYear()
+                ) {
+                    return item
+                }
             }).map(item=>{
                 return monthSpent += item.paymentAmount;
             })
@@ -41,10 +38,13 @@ class Main extends Component {
     
         this.props.incomes.filter(item=>{
             let date = item.date;
-            date = new Date(date).getMonth();
-                if(date === this.props.month){
-                    return item
-                }
+            let year = new Date(date).getFullYear();
+            let month = new Date(date).getMonth();
+            if(month === new Date(this.props.month).getMonth() &&
+                year === new Date(this.props.month).getFullYear()
+            ) {
+                return item
+            }
             }).forEach(item=>monthEarned += item.amount);
         return (
             <div>
@@ -56,7 +56,7 @@ class Main extends Component {
                             {
                                 this.props.categories.map((category, index)=>{
                                     return (
-                                        <Categ key={index} index={index} categ={category} indexCat={index} month={this.props.month}/>
+                                        <Categ key={index} index={index} categ={category} indexCat={index} date={this.props.month}/>
                                     ) 
                                 })
                             }
@@ -64,18 +64,9 @@ class Main extends Component {
                         
                     </div>
                     <div className="main-content-item">
-                        {/* <select name="" id="" 
-                            onChange={(e)=>this.props.changeMonth(Number(e.target.value))}
-                            defaultValue={new Date(this.props.month).getMonth()}>
-                            <option value="0">Январь</option>
-                            <option value="1">Февраль</option>
-                            <option value="2">Март</option>
-                            <option value="3">Апрель</option>
-                        </select> */}
                         <input type="month"
                             defaultValue={new Date(this.props.month).getFullYear()+'-0'+(new Date(this.props.month).getMonth()+1)}
                             onChange={(e)=>this.props.changeMonth(e.target.value)}
-                            // onChange={(e)=>console.log(e.target.value)}
                             />
                         <p>Заработано за месяц: {monthEarned}</p>
                         <p>Потрачено за месяц: {monthSpent}</p>
@@ -94,7 +85,7 @@ function mapStateToProps (state) {
     return {
         incomes: state.incomes,
         categories: state.categories,
-        month: state.month,
+        month: state.date,
     }
 }
 

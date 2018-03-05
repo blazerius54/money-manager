@@ -1,10 +1,10 @@
 import { CHANGE_MONTH, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT, 
         ADD_INCOME, EDIT_INCOME, DELETE_INCOME } from '../const/index';
 
-export const changeMonth = (month) => {
+export const changeMonth = (date) => {
     const action = {
         type: CHANGE_MONTH,
-        month
+        date
     }
     console.log(action)
     return action

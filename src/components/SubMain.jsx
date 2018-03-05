@@ -55,14 +55,12 @@ class SubMain extends Component {
                             let date2 = new Date(b.date);
                             return date1 - date2;
                         }).filter(item=>{
-                            // console.log(item2)
                             let date = item.date;
-                            date = new Date(date).getMonth();
-                            if(this.state.month !==null) {
-                                if(date === this.props.month) {
-                                    return item
-                                }
-                            } else {
+                            let year = new Date(date).getFullYear();
+                            let month = new Date(date).getMonth();
+                            if(month === new Date(this.props.date).getMonth() &&
+                                year === new Date(this.props.date).getFullYear()
+                            ) {
                                 return item
                             }
                         }).map((item, i)=>{
@@ -94,7 +92,7 @@ class SubMain extends Component {
 function mapStateToProps (state) {
     return {
         categories: state.categories,
-        month: state.month
+        date: state.date
     } 
 }
 

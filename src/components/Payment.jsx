@@ -24,13 +24,11 @@ class Payment extends Component {
             // amount: 0,
             // date: null,
             isEditing: false,
-            // xx: '2018-02-03'
         });
 
     }
 
     render () {
-        // console.log(this.props.item.id)
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
         return (
