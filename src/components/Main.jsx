@@ -46,7 +46,6 @@ class Main extends Component {
                     return item
                 }
             }).forEach(item=>monthEarned += item.amount);
-
         return (
             <div>
                 <header>
@@ -66,20 +65,18 @@ class Main extends Component {
                     </div>
                     <div className="main-content-item">
                         {/* <select name="" id="" 
-                            onChange={(e)=>this.setState({month: Number(e.target.value)})}
-                            defaultValue={this.state.month}>
-                            <option value="0">Январь</option>
-                            <option value="1">Февраль</option>
-                            <option value="2">Март</option>
-                        </select> */}
-                        <select name="" id="" 
                             onChange={(e)=>this.props.changeMonth(Number(e.target.value))}
                             defaultValue={new Date(this.props.month).getMonth()}>
                             <option value="0">Январь</option>
                             <option value="1">Февраль</option>
                             <option value="2">Март</option>
                             <option value="3">Апрель</option>
-                        </select>
+                        </select> */}
+                        <input type="month"
+                            defaultValue={new Date(this.props.month).getFullYear()+'-0'+(new Date(this.props.month).getMonth()+1)}
+                            onChange={(e)=>this.props.changeMonth(e.target.value)}
+                            // onChange={(e)=>console.log(e.target.value)}
+                            />
                         <p>Заработано за месяц: {monthEarned}</p>
                         <p>Потрачено за месяц: {monthSpent}</p>
                         <p>Баланс: {monthEarned - monthSpent}</p>
