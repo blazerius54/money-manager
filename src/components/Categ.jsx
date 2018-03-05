@@ -15,8 +15,8 @@ class Categ extends Component {
         }).forEach(item=>{
             spent+=item.paymentAmount
         });
-        this.props.categ.spent = spent;
-        console.log(this.props.categ)
+        // this.props.categ.spent = spent;
+        // console.log(this.props.indexCat)
         return (
             <div>
                 <Link to={path}>
@@ -25,7 +25,6 @@ class Categ extends Component {
                         <p>{spent}</p>
                     </li>
                 </Link>
-                {/* <Payment item={item} category={index}/> */}
                 {
                     this.props.categ.payments.filter((item, index)=>{
                         let date = item.date;
@@ -38,7 +37,7 @@ class Categ extends Component {
                         let date2 = new Date(b.date);
                         return date1 - date2;
                     }).map((item, i)=>{
-                        return <Payment key={i} item={item} category={this.props.categ.payments}/>
+                        return <Payment  item={item} key={i} category={this.props.indexCat}/>
                     })
                 }
             </div>

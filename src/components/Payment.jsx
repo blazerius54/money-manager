@@ -30,6 +30,7 @@ class Payment extends Component {
     }
 
     render () {
+        console.log(this.props.item.id)
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
         return (
@@ -57,7 +58,7 @@ class Payment extends Component {
                         :
                         <div>
                             <p>{this.props.item.paymentText}: {this.props.item.paymentAmount}</p>
-                            <button onClick={()=>this.props.deletePayment(this.props.item.id, this.props.index)}>Delete</button>
+                            <button onClick={()=>this.props.deletePayment(this.props.item.id, this.props.category)}>Delete</button>
                         </div>                         
                     }
                 
