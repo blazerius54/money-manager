@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Payment from './Payment';
 
+
 class Categ extends Component {
     constructor (props) {
         super(props);
@@ -22,9 +23,7 @@ class Categ extends Component {
             ){
                 spent+=item.paymentAmount
             }
-        }).forEach(item=>{
-            spent+=item.paymentAmount
-        });
+        })
         return (
             <li className={this.props.categ.path}>
                 <div className='div-category-header'>

@@ -7,6 +7,7 @@ import Incomes from './Incomes';
 import { bindActionCreators } from 'redux';
 import { changeMonth } from '../actions/index';
 
+
 class Main extends Component {
 
     render () {
@@ -43,7 +44,7 @@ class Main extends Component {
                             {
                                 this.props.categories.map((category, index)=>{
                                     return (
-                                        <Categ key={index} index={index} categ={category} indexCat={index} date={this.props.month}/>
+                                        <Categ key={index} index={index} categ={category} indexCat={index} date={this.props.date}/>
                                     ) 
                                 })
                             }
