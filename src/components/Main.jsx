@@ -8,44 +8,31 @@ import { bindActionCreators } from 'redux';
 import { changeMonth } from '../actions/index';
 
 class Main extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            month: new Date(Date.now()).getMonth(),
-            isVisible: true
-        }
-    }
 
     render () {
-
         let monthEarned = 0;
         let monthSpent = 0;
 
+        const filterForDate = (item)=> {
+            let date = item.date;
+            let year = new Date(date).getFullYear();
+            let month = new Date(date).getMonth();
+            if(month === new Date(this.props.date).getMonth() &&
+                year === new Date(this.props.date).getFullYear()
+            ) {
+                return item
+            }
+        }
+
         this.props.categories.forEach((item)=>{
-            item.payments.filter(item=>{
-                let date = item.date;
-                let year = new Date(date).getFullYear();
-                let month = new Date(date).getMonth();
-                if(month === new Date(this.props.month).getMonth() &&
-                    year === new Date(this.props.month).getFullYear()
-                ) {
-                    return item
-                }
-            }).map(item=>{
+            item.payments.filter(filterForDate).map(item=>{
                 return monthSpent += item.paymentAmount;
             })
         })
     
-        this.props.incomes.filter(item=>{
-            let date = item.date;
-            let year = new Date(date).getFullYear();
-            let month = new Date(date).getMonth();
-            if(month === new Date(this.props.month).getMonth() &&
-                year === new Date(this.props.month).getFullYear()
-            ) {
-                return item
-            }
-            }).forEach(item=>monthEarned += item.amount);
+        this.props.incomes.filter(filterForDate).forEach(item=>
+            monthEarned += item.amount
+        );
         return (
             <div>
                 <header>
@@ -65,7 +52,7 @@ class Main extends Component {
                     </div>
                     <div className="main-content-item">
                         <input type="month"
-                            defaultValue={new Date(this.props.month).getFullYear()+'-0'+(new Date(this.props.month).getMonth()+1)}
+                            defaultValue={new Date(this.props.date).getFullYear()+'-0'+(new Date(this.props.date).getMonth()+1)}
                             onChange={(e)=>this.props.changeMonth(e.target.value)}
                             />
                         <p>Заработано за месяц: {monthEarned}</p>
@@ -73,7 +60,7 @@ class Main extends Component {
                         <p>Баланс: {monthEarned - monthSpent}</p>
                     </div>
                         <div className='main-content-item'>
-                            <Incomes incomes={this.props.incomes} month={this.props.month}/>
+                            <Incomes incomes={this.props.incomes} month={this.props.date}/>
                         </div>
                 </div>
             </div>
@@ -85,7 +72,7 @@ function mapStateToProps (state) {
     return {
         incomes: state.incomes,
         categories: state.categories,
-        month: state.date,
+        date: state.date,
     }
 }
 
