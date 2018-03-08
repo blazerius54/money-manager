@@ -11,33 +11,29 @@ class Form extends Component {
 
     render() {
         return (
-        <div className="div-form" onSubmit={(e)=>{this.handleSubmit(e)}}>
-            <form >
-                <div className='div-form-inputs'>
-                    <input
-                    ref={ref => {
-                        this.inputText = ref;
-                    }}
-                    type="text"
-                    placeholder="Text"
-                    onChange={e => {
-                        this.props.onChangeForm(this.inputText.value, this.inputAmount.value);
-                    }}
-                    />
-                    <input
-                    ref={ref => {
-                        this.inputAmount = ref;
-                    }}
-                    type="text"
-                    placeholder="Payment"
-                    onChange={e => {
-                        this.props.onChangeForm(this.inputText.value, this.inputAmount.value);
-                    }}
-                    />
-                </div>
+            <form className='div-form-inputs' onSubmit={(e)=>{this.handleSubmit(e)}}>
+                <input
+                ref={ref => {
+                    this.inputText = ref;
+                }}
+                type="text"
+                placeholder="Text"
+                onChange={e => {
+                    this.props.onChangeForm(this.inputText.value, this.inputAmount.value);
+                }}
+                />
+                <input
+                ref={ref => {
+                    this.inputAmount = ref;
+                }}
+                type="text"
+                placeholder="Payment"
+                onChange={e => {
+                    this.props.onChangeForm(this.inputText.value, this.inputAmount.value);
+                }}
+                />
                 <input type="submit" />
             </form>
-        </div>
     )
   }
 }

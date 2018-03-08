@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+@import './_form.scss';
+@import './_categ.scss';
+@import './_sub-main.scss';
+@import './_main.scss';
+@import './_payment.scss';
+ 
+* {
+    text-decoration: none;
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 105%;
+}
+
+ul {
+    padding-left:0;
+    margin: 0;
+}
+
+.header-of-app {
+    text-align: left;
+}
+
+.app-container {
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+}
+
+.main-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.main-content > * {
+    flex: 1 0 30%;
+}
+
+.main-content-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+}
+
+.info p {
+    margin-left: 3px;
+}
+
+
+

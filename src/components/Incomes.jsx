@@ -32,7 +32,7 @@ sendFormData () {
     })
 }
   render() {
-    return <div>
+    return <div className='main-content-item'>
         <p>Доходы:</p>
         <ul className="payments-container">
           {

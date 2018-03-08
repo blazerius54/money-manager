@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Categ from './Categ';
 import Payment from './Payment';
 import Incomes from './Incomes';
+import Header from './Header';
 import { bindActionCreators } from 'redux';
 import { changeMonth } from '../actions/index';
 
@@ -36,8 +37,7 @@ class Main extends Component {
         );
         return (
             <div>
-                <header>
-                </header>  
+                <Header />
                 <div className='main-content'>
                     <div className='main-content-item'>
                         <ul className='payments-container'>
@@ -52,17 +52,11 @@ class Main extends Component {
                         
                     </div>
                     <div className="main-content-item">
-                        <input type="month"
-                            defaultValue={new Date(this.props.date).getFullYear()+'-0'+(new Date(this.props.date).getMonth()+1)}
-                            onChange={(e)=>this.props.changeMonth(e.target.value)}
-                            />
                         <p>Заработано за месяц: {monthEarned}</p>
                         <p>Потрачено за месяц: {monthSpent}</p>
                         <p>Баланс: {monthEarned - monthSpent}</p>
                     </div>
-                        <div className='main-content-item'>
-                            <Incomes incomes={this.props.incomes} month={this.props.date}/>
-                        </div>
+                    <Incomes incomes={this.props.incomes} month={this.props.date}/>
                 </div>
             </div>
         )
