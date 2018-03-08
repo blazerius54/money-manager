@@ -37,10 +37,6 @@ class Main extends Component {
         );
         return (
             <div>
-                {/* <header>
-                    <Link to='/' className='header-of-app'><h2>Money Manager</h2></Link>
-                    
-                </header>   */}
                 <Header />
                 <div className='main-content'>
                     <div className='main-content-item'>
@@ -56,15 +52,11 @@ class Main extends Component {
                         
                     </div>
                     <div className="main-content-item">
-                        {/* <input type="month"
-                            defaultValue={new Date(this.props.date).getFullYear()+'-0'+(new Date(this.props.date).getMonth()+1)}
-                            onChange={(e)=>this.props.changeMonth(e.target.value)}
-                            /> */}
                         <p>Заработано за месяц: {monthEarned}</p>
                         <p>Потрачено за месяц: {monthSpent}</p>
                         <p>Баланс: {monthEarned - monthSpent}</p>
                     </div>
-                            <Incomes incomes={this.props.incomes} month={this.props.date}/>
+                    <Incomes incomes={this.props.incomes} month={this.props.date}/>
                 </div>
             </div>
         )
