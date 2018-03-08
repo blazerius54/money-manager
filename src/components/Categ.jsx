@@ -25,17 +25,17 @@ class Categ extends Component {
             }
         })
         return (
-            <li className={this.props.categ.path}>
+            <li className={this.props.categ.path + ' category'}>
                 <div className='div-category-header'>
                     <Link to={path}>
                             <p>{name}: {spent}</p>
                     </Link>
                             <p onClick={()=>this.setState({isVisible: !this.state.isVisible})}>
-                             x</p>
+                             o</p>
                 </div>
                 {
                     this.state.isVisible? 
-                    <div className='content'>
+                    <div className='category-container-content'>
                     {
                         this.props.categ.payments.filter((item, index)=>{
                             let date = item.date;

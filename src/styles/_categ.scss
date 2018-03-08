@@ -1,0 +1,21 @@
+.category {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: solid 3px black;
+    border-radius: 15px;
+     
+    .div-category-header {
+        font-size: 105%;
+        font-weight: 600;
+        border-bottom: solid 3px #888;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        
+    }
+
+    .category-container-content {
+        display: flex;
+        flex-direction: column;
+    }
+}

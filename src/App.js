@@ -21,18 +21,13 @@ class App extends Component {
       
     <Router history={history}>
       <Switch>
-      <Provider store={store}>
-      <div className="">
-        <div className="app-container">
-          <Link to='/' className='header-of-app'><h2>Money Manager</h2></Link>
-          <Route exact path='/' component={Main} />
-          <Route exact path='/:name' component={SubMain} />
-
-        </div>
-      </div>
-    </Provider>    
-    </Switch>
-      
+        <Provider store={store}>
+          <div className="app-container">
+            <Route exact path='/' component={Main} />
+            <Route exact path='/:name' component={SubMain} />
+          </div>
+        </Provider>    
+      </Switch>
     </Router>
     
     );
