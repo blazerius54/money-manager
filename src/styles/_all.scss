@@ -5,6 +5,7 @@
 @import './_sub-main.scss';
 @import './_main.scss';
 @import './_payment.scss';
+@import './_header.scss';
  
 * {
     text-decoration: none;
@@ -21,14 +22,19 @@ ul {
     margin: 0;
 }
 
-.header-of-app {
-    text-align: left;
+a {
+    color: rgb(77, 77, 77);
+}
+.app-wrapper {
+    width: 100%;
+    // padding: 20px;
 }
 
 .app-container {
     display: flex;
     /* justify-content: center; */
     flex-direction: column;
+    align-items: center;
 }
 
 .main-content {

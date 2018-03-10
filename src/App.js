@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 //router
-import { Route, Switch, Router, Link } from 'react-router-dom';
+import { Route, Switch, Router } from 'react-router-dom';
 // import {Link} from 'react-router-dom';
 
 import createBrowserHistory from 'history/createBrowserHistory';

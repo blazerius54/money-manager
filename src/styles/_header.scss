@@ -1,0 +1,69 @@
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
+
+    .logo-of-app {
+        flex: 1 1 40%;
+    }
+    .input-date{
+        flex: 1 1 57%;
+        display: flex;
+    }
+
+
+    .date-container {
+        width: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // margin-left: 2px;
+        font-size: 130%;
+        img {
+            
+            opacity: 0.1;
+            transform: scale(0.8);
+            transition: all 1s ease;
+        }
+        
+        img:first-of-type {
+            opacity: 0.1;
+            transform: scale(0.8) rotate(180deg);
+        }
+
+        img:first-of-type:hover, img:hover {
+            opacity: 1;
+            transform: scale(1.2) rotate(180)
+        }
+        p {
+            margin: 10px;
+        }
+
+    }
+
+    .date-container:last-of-type {
+        margin-top: 5px;
+        
+    }
+            .year {
+                    font-size: 80%;
+                
+            }
+}
+
+@media screen and (max-width: 768px) {
+    .app-header {
+      justify-content: space-around !important;
+
+        .input-date{
+            flex: 0;
+        }
+    }
+}
+@media screen and (max-width: 484px) {
+    .app-header {
+      flex-direction: column;
+    }
+  }

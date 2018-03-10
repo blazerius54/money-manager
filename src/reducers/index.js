@@ -14,7 +14,7 @@ export function reducer(state = [], action) {
                 ...state,
                 date: action.date
             }
-            console.log(newState)
+            console.log(action)
             // bake_cookie('categories', newState);            
             
             return newState;
