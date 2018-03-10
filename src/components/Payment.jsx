@@ -10,16 +10,11 @@ class Payment extends Component {
         super (props);
         this.state = {
             isEditing: false,
-            text: '',
-            amount: 0,
-            date: new Date(Date.now()),
-            // newPayment
         }
     }
 
     handleEdit () {
         this.setState({
-            text: '',
             isEditing: false,
         });
         this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.categ, this.props.item.id)
@@ -39,14 +34,14 @@ class Payment extends Component {
                             type='text' 
                             placeholder="text"
                             defaultValue={this.props.item.paymentText}
-                            onChange={(e)=>this.setState({text: e.target.value})}
+                            // onChange={(e)=>this.setState({text: e.target.value})}
                             ref={(ref=> {this.textInput = ref})}
                             />
                             <input 
                             type='text' 
                             placeholder="amount"
                             defaultValue={this.props.item.paymentAmount}
-                            onChange={(e)=>this.setState({amount: Number(e.target.value)})}
+                            // onChange={(e)=>this.setState({amount: Number(e.target.value)})}
                             ref={(ref=> {this.amountInput = ref})}
                             />
                         </div>
@@ -66,7 +61,7 @@ class Payment extends Component {
                         placeholder="date"
                         id='datePicker'
                         defaultValue={dafaultDate}
-                        onChange={(e)=>this.setState({date: e.target.value})}
+                        // onChange={(e)=>this.setState({date: e.target.value})}
                         ref={(ref=> {this.dateInput = ref})}
                         />
                         <button
