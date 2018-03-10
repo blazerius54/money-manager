@@ -2,12 +2,12 @@ import { createStore } from 'redux';
 import { reducer } from '../reducers/index';
 import categories from '../data/categories';
 import incomes from '../data/incomes';
-import {month} from '../data/categories';
+import { date } from '../data/categories';
 
 const defaultState = {
-    incomes: incomes,
+    incomes,
     categories,
-    month
+    date
 };
 
 const store = createStore(reducer, defaultState);

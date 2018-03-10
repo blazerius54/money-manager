@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Payment from './Payment';
 import Form from './Form';
@@ -42,49 +43,45 @@ class SubMain extends Component {
         let monthSpent = 0;
         console.log(index)
         return (
-            
             <div>
-                <h2>I`m sub-main</h2>
-                <p>
-                    {categ.name} 
-                </p>
-                <ul className='payments-container'>
-                    {
-                        categ.payments.sort((a, b) => {
-                            let date1 = new Date(a.date);
-                            let date2 = new Date(b.date);
-                            return date1 - date2;
-                        }).filter(item=>{
-                            // console.log(item2)
-                            let date = item.date;
-                            date = new Date(date).getMonth();
-                            if(this.state.month !==null) {
-                                if(date === this.props.month) {
+                <header className='app-header'>
+                    <Link to='/' className='header-of-app'><h2>Money Manager</h2></Link>
+                    <input type="month"
+                        defaultValue={new Date(this.props.date).getFullYear()+'-0'+(new Date(this.props.date).getMonth()+1)}
+                        onChange={(e)=>this.props.changeMonth(e.target.value)}
+                    />
+                </header>
+                <div className='sub-main'>
+                    <div>
+                        <p>
+                            {categ.name} 
+                        </p>
+                    </div>
+                    <ul className='payments-container'>
+                        {
+                            categ.payments.sort((a, b) => {
+                                let date1 = new Date(a.date);
+                                let date2 = new Date(b.date);
+                                return date1 - date2;
+                            }).filter(item=>{
+                                let date = item.date;
+                                let year = new Date(date).getFullYear();
+                                let month = new Date(date).getMonth();
+                                if(month === new Date(this.props.date).getMonth() &&
+                                    year === new Date(this.props.date).getFullYear()
+                                ) {
                                     return item
                                 }
-                            } else {
-                                return item
-                            }
-                        }).map((item, i)=>{
-                            monthSpent += item.paymentAmount 
-                            return (
-                                <Payment key={i} item={item} index={index} i={i} categ={index}/>
-                            )
-                        })
-                    }
-                </ul>
-                <p>Потрачено за месяц: { monthSpent}</p>
-
-                <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index}/>
-                
-                <div>
-                    <select name="" id="" 
-                        onChange={(e)=>this.props.changeMonth(Number(e.target.value))}
-                        defaultValue={this.props.month}>
-                        <option value="0">Январь</option>
-                        <option value="1">Февраль</option>
-                        <option value="2">Март</option>
-                    </select>
+                            }).map((item, i)=>{
+                                monthSpent += item.paymentAmount 
+                                return (
+                                    <Payment key={i} item={item} index={index} i={i} categ={index}/>
+                                )
+                            })
+                        }
+                    </ul>
+                    <p>Потрачено за месяц: { monthSpent}</p>
+                    <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index}/>
                 </div>
             </div>
         )
@@ -94,7 +91,7 @@ class SubMain extends Component {
 function mapStateToProps (state) {
     return {
         categories: state.categories,
-        month: state.month
+        date: state.date
     } 
 }
 

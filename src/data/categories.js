@@ -1,5 +1,4 @@
-// export let month = new Date(Date.now()).getMonth();
-export let month = new Date(Date.now());
+export let date = new Date(Date.now());
 
 let categories = [
     {   

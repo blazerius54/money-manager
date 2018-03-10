@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Payment from './Payment';
 
+
 class Categ extends Component {
     constructor (props) {
         super(props);
@@ -14,42 +15,34 @@ class Categ extends Component {
         let spent = 0;
         this.props.categ.payments.filter(item=>{
             let date = item.date;
-            date = new Date(date).getMonth();
-            if(date === this.props.month){
-                return item
+            let year = new Date(date).getFullYear();
+            let month = new Date(date).getMonth();
+
+            if(month === new Date(this.props.date).getMonth() &&
+                year === new Date(this.props.date).getFullYear()
+            ){
+                spent+=item.paymentAmount
             }
-        }).forEach(item=>{
-            spent+=item.paymentAmount
-        });
-        // this.props.categ.spent = spent;
-        // console.log(this.props.indexCat)
+        })
         return (
-            <li className={this.props.categ.path}>
+            <li className={this.props.categ.path + ' category'}>
                 <div className='div-category-header'>
                     <Link to={path}>
                             <p>{name}: {spent}</p>
                     </Link>
                             <p onClick={()=>this.setState({isVisible: !this.state.isVisible})}>
-                             x</p>
+                             o</p>
                 </div>
                 {
                     this.state.isVisible? 
-                    <div className='content'>
+                    <div className='category-container-content'>
                     {
                         this.props.categ.payments.filter((item, index)=>{
-                            // let date = item.date;
-                            // date = new Date(date).getMonth();
-                            // if(date === this.props.month){
-                            //     return item
-                            // }
                             let date = item.date;
-                            // let date2 = new Date(date).getFullYear() + ' ' + new Date(date).getMonth()
                             let year = new Date(date).getFullYear();
                             let month = new Date(date).getMonth();
-
-                            // console.log(year)
-                            if(month === new Date(this.props.month).getMonth() &&
-                                year === new Date(this.props.month).getFullYear()
+                            if(month === new Date(this.props.date).getMonth() &&
+                                year === new Date(this.props.date).getFullYear()
                             ){
                                 return item
                             }

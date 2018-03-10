@@ -23,7 +23,6 @@ class Payment extends Component {
             // amount: 0,
             // date: null,
             isEditing: false,
-            // xx: '2018-02-03'
         });
 
     }
