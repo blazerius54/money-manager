@@ -1,116 +1,73 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Income from "./Income";
+import Form from "./Form";
 import { connect } from 'react-redux';
-import moment from 'moment';
-import { addIncome } from '../actions/index';
 import { bindActionCreators } from 'redux';
-
+import { addIncome } from '../actions/index';
 
 class Incomes extends Component {
-    constructor (props) {
-        super (props);
-        this.state = {
-            isEditing: false,
-            text: '',
-            amount: 0,
-            date: new Date(Date.now()),
-            // newPayment
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFiltred: false,
+      month: new Date(Date.now()).getMonth(),
+      text: "",
+      amount: 0
+    };
+  };
 
-
-
-    renderDate () {
-        if(this.state.isEditing === true){
-            return (
-                <input
-                type="datetime-local" 
-                placeholder='date' 
-                onClick={()=>this.setState({isEditing: !this.state.isEditing})}/>
-            ) 
-       } else {
-            return (
-                <p 
-                onClick={()=>this.setState({isEditing: true})}>
-                    {moment(new Date(this.props.item.date)).format("Do MMM YYYY")}
-                </p>
-            )
-        }                      
-    }
-
-
-    render () {
-        console.log(this.props)
-        //форматируем дату для инпута 
-        let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
-        return <div>
-            <li className="payment-container">
-              <div>
-                
-                    {
-                        this.state.isEditing === true?
-                        <div>
-                            <input 
-                            type='text' 
-                            placeholder="text"
-                            defaultValue={this.props.item.incomeText}
-                            onChange={(e)=>this.setState({text: e.target.value})}
-                            ref={(ref=> {this.textInput = ref})}
-                            />
-                            <input 
-                            type='text' 
-                            placeholder="amount"
-                            defaultValue={this.props.item.incomeAmount}
-                            onChange={(e)=>this.setState({amount: Number(e.target.value)})}
-                            ref={(ref=> {this.amountInput = ref})}
-                            />
-                        </div>
-                        :
-                        <div>
-                            <p>{this.props.item.incomeText}: {this.props.item.incomeAmount}</p>
-                            {/* <button onClick={()=>this.props.deletePayment(this.props.item.id, this.props.index)}>Delete</button> */}
-                        </div>                         
-                    }
-                
-              </div>
-              <div>
-                {
-                    this.state.isEditing === true ? 
-                    <div>
-                        <input 
-                        type='date' 
-                        placeholder="date"
-                        id='datePicker'
-                        defaultValue={dafaultDate}
-                        onChange={(e)=>this.setState({date: e.target.value})}
-                        ref={(ref=> {this.dateInput = ref})}
-                        />
-                        <button
-                        onClick={() => this.handleEditDate()} 
-                        >save</button>
-                    </div>
-                    : 
-                    <p
-                        onClick={() => this.setState({ 
-                            isEditing: true,
-                        })}
-                    >
-                        {moment(new Date(this.props.item.date)).format(
-                        "Do MMM YYYY"
-                        )}
-                    </p>
-                }
-              </div>
-              {/* {(new Date(item.date).toString())} */}
-              {/* {item.date.getMonth().toString()} */}
-            </li>
-          </div>;
-    }
+  onChangeForm (text, amount) {
+    this.setState({
+        text: text,
+        amount: amount
+    })
 }
 
-
+sendFormData () {
+    this.props.addIncome(this.state.text, this.state.amount);
+    
+    this.setState({
+        text: '',
+        amount: 0
+    })
+}
+  render() {
+    return <div>
+        <p>Доходы:</p>
+        <ul className="payments-container">
+          {
+            this.props.incomes.sort((a, b) => {
+              let date1 = new Date(a.date);
+              let date2 = new Date(b.date);
+              return date1 - date2;
+            }).filter((item, index) => {
+              let date = item.date;
+              date = new Date(date).getMonth();
+              if (this.state.month !== null) {
+                if (date === this.props.month) {
+                  return item;
+                }
+              } else {
+                return item;
+              }
+            }).map((item, index) => {
+              return (
+                <Income 
+                  key={index} 
+                  item={item} 
+                  sendFormData={this.sendFormData.bind(this)} 
+                  onChangeForm={this.onChangeForm.bind(this)} 
+                />
+              )  
+            })
+          }
+        </ul>
+        <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} />
+      </div>;
+  }
+}
 
 function mapDispatchToProps (dispatch) {
     return bindActionCreators({ addIncome }, dispatch)
 }
-export default connect(null, mapDispatchToProps)(Incomes);
-// export default Incomes;
+export default connect (null, mapDispatchToProps)(Incomes);

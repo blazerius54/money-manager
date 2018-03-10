@@ -1,3 +1,5 @@
+export let month = new Date(Date.now()).getMonth();
+
 let categories = [
     {   
         path: 'food',
@@ -37,6 +39,13 @@ let categories = [
                 categoryName: 'food',   
                 paymentText: 'Печенье',
                 paymentAmount: 10,
+                date: 'Fri Mar 25 2018 11:10:19 GMT+0700 (RTZ 6 (зима))'
+            },
+            {   
+                id: 5,
+                categoryName: 'food',   
+                paymentText: 'Печенье',
+                paymentAmount: 2,
                 date: 'Fri Mar 25 2018 11:10:19 GMT+0700 (RTZ 6 (зима))'
             }
         ]

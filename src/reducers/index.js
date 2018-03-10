@@ -1,26 +1,26 @@
-import { INCREMENT_SPENT, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT } from '../const/index';
+import { ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT, CHANGE_MONTH,
+         ADD_INCOME, EDIT_INCOME, DELETE_INCOME } from '../const/index';
 import { bake_cookie, read_cookie } from 'sfcookies';
 
 export function reducer(state = [], action) {
     let newState = null;
     if(read_cookie('categories').categories) {
-        console.log('yep')
         state = read_cookie('categories');
     }
     switch (action.type) {
-        case INCREMENT_SPENT:
+        case CHANGE_MONTH:
+            console.log(action)      
             newState = {
                 ...state,
-                categories: [
-                    ...state.categories.slice(0, action.index),
-                    state.categories[action.index] = addText(state.categories[action.index], action),
-                    ...state.categories.slice(action.index + 1)
-                ],
-            };
-            bake_cookie('categories', newState);            
+                month: action.month
+            }
+            console.log(newState)
+            // bake_cookie('categories', newState);            
+            
             return newState;
         case ADD_PAYMENT: 
-            // Сашин вариант 
+            // Сашин вариант
+            console.log(action) 
             newState = {
                 ...state,
                 categories:[
@@ -39,7 +39,7 @@ export function reducer(state = [], action) {
                     // state.categories[action.index] = addPayment(state.categories[action.index], action), 
                     ...state.categories.slice(action.index+1),]
                 };
-            bake_cookie('categories', newState)                
+            // bake_cookie('categories', newState)                
             return newState;
         case CHANGE_PAYMENT:
             console.log(state);
@@ -59,12 +59,13 @@ export function reducer(state = [], action) {
                     ...state.categories.slice(action.category+1),
                 ]    
             }
-            bake_cookie('categories', newState)                            
+            // bake_cookie('categories', newState)                            
             return newState
         case DELETE_PAYMENT: 
-            // console.log(state.categories[action.category].payments)
+            console.log(action, state);
             newState = {
                 ...state,
+                month: state.month,                
                 categories: [
                     ...state.categories.slice(0,action.category),
                     state.categories[action.category] = {
@@ -76,76 +77,37 @@ export function reducer(state = [], action) {
                     ...state.categories.slice(action.category+1),
                 ]  
             }
-            bake_cookie('categories', newState);            
+            // bake_cookie('categories', newState);  
+            console.log(newState)          
             return newState;
+        case ADD_INCOME: 
+            newState = {
+                ...state,
+                incomes: [
+                    ...state.incomes,
+                    action.income
+                ]
+            }
+            // bake_cookie('categories', newState);                        
+            return newState
+        case EDIT_INCOME:
+            let newIncomes = state.incomes.filter(item=>{
+                return item.id !== action.income.id
+            })
+            newState = {
+                ...state,
+                incomes: [
+                    ...newIncomes, action.income
+                ]
+            }
+            return newState
+        case DELETE_INCOME: 
+            newState = {
+                ...state,
+                incomes: state.incomes.filter(item => item.id !== action.id)
+            }
+            return newState
         default:
             return state;
     }
 }
-
-// function foo (state = [], action) {
-//     let newState = action.payment
-//     console.log(newState)
-//         return newState
-// }
-
-// function addPayment (state = [], action) {
-//     console.log('action',action)
-//     console.log(state)
-//     return Object.assign(
-//         [],
-//         state,
-//         {
-//             payments: [
-//                 ...state.payments,
-//                 action.payment
-//             ]
-//         }
-//     )
-// }
-
-function addText(state = [], action) {
-    // console.log(state)
-    if (state.payments.length > 0) {
-        let sum=0;
-        sum+=action.amount;
-        state.payments.forEach((item, i)=>{
-            sum+=state.payments[i].paymentAmount
-        })
-        // sum+=action.amount
-        return {
-            ...state,
-            spent: sum        
-        }
-    } else {
-        return {
-            ...state,
-            spent: action.amount
-
-        }
-    }
-}
-
-        
-// мои варианты
-// let state2 = null;
-// state2 = state;
-// state2.categories[action.index].payments = [...state.categories[action.index].payments, action.payment]
-// return state2
-
-// console.log(state.categories[action.index].payments)
-// let newState = {
-//     paymentText: action.text,
-//     paymentAmount: action.amount
-// };
-// console.log(newState)
-// return {
-//     categories: [
-//         ...state.categories,
-//         state.categories[action.index] = [
-//             ...state.categories[action.index],
-//             state.categories[action.index].payments = newState
-//         ]
-//     ]
-// }  
-

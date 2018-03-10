@@ -1,41 +1,32 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { changePayment, deletePayment } from '../actions/index';
+import { editIncome, deleteIncome } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-
-class Payment extends Component {
+class Income extends Component {
     constructor (props) {
         super (props);
         this.state = {
             isEditing: false,
-            text: '',
-            amount: 0,
-            date: new Date(Date.now()),
-            // newPayment
         }
     }
 
-    handleEditDate () {
-        this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.index, this.props.item.id)
-        this.setState({
-            text: '',
-            // amount: 0,
-            // date: null,
-            isEditing: false,
-            // xx: '2018-02-03'
-        });
 
+    handleEditIncome () {
+        console.log(this.props.item.id)
+        this.props.editIncome(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.item.id)
+        this.setState({
+            isEditing: false
+        })
     }
 
     render () {
-        console.log(this.props.index)
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
-        return (
+        return <div>
             <li className="payment-container">
-              
+              <div>
                 
                     {
                         this.state.isEditing === true?
@@ -43,25 +34,25 @@ class Payment extends Component {
                             <input 
                             type='text' 
                             placeholder="text"
-                            defaultValue={this.props.item.paymentText}
-                            onChange={(e)=>this.setState({text: e.target.value})}
+                            defaultValue={this.props.item.text}
                             ref={(ref=> {this.textInput = ref})}
                             />
                             <input 
                             type='text' 
                             placeholder="amount"
-                            defaultValue={this.props.item.paymentAmount}
-                            onChange={(e)=>this.setState({amount: Number(e.target.value)})}
+                            defaultValue={this.props.item.amount}
                             ref={(ref=> {this.amountInput = ref})}
                             />
                         </div>
                         :
                         <div>
-                            <p>{this.props.item.paymentText}: {this.props.item.paymentAmount}</p>
-                            <button onClick={()=>this.props.deletePayment(this.props.item.id, this.props.index)}>Delete</button>
+                            <p>{this.props.item.text}: {this.props.item.amount}</p>
+                            <button onClick={()=>this.props.deleteIncome(this.props.item.id)}>Delete</button>
+                            
                         </div>                         
                     }
                 
+              </div>
               <div>
                 {
                     this.state.isEditing === true ? 
@@ -71,11 +62,10 @@ class Payment extends Component {
                         placeholder="date"
                         id='datePicker'
                         defaultValue={dafaultDate}
-                        onChange={(e)=>this.setState({date: e.target.value})}
                         ref={(ref=> {this.dateInput = ref})}
                         />
                         <button
-                        onClick={() => this.handleEditDate()} 
+                        onClick={() => this.handleEditIncome()} 
                         >save</button>
                     </div>
                     : 
@@ -91,11 +81,12 @@ class Payment extends Component {
                 }
               </div>
             </li>
-        )
+          </div>;
     }
 }
 
 function mapDispatchToProps (dispatch) {
-    return bindActionCreators({ changePayment, deletePayment }, dispatch)
+    return bindActionCreators({ editIncome, deleteIncome }, dispatch)
 }
-export default connect(null, mapDispatchToProps)(Payment);
+
+export default connect(null, mapDispatchToProps)(Income)
