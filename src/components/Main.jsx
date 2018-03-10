@@ -56,8 +56,8 @@ class Main extends Component {
                         <ul className='payments-container'>
                             {
                                 this.props.categories.map((category, index)=>{
-                                    return (
-                                        <Categ key={index} index={index} categ={category} indexCat={index} month={this.props.month}/>
+                                  return (
+                                        <Categ key={index} index={index} categ={category} indexCat={index} date={this.props.date}/>
                                     ) 
                                 })
                             }

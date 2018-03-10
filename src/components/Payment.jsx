@@ -18,7 +18,6 @@ class Payment extends Component {
     }
 
     handleEditDate () {
-        this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.categ, this.props.item.id)
         this.setState({
             text: '',
             // amount: 0,
@@ -30,7 +29,6 @@ class Payment extends Component {
     }
 
     render () {
-        // console.log(this.props.item.id)
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
         return (
