@@ -30,7 +30,6 @@ export const addPayment = (text, amount, index) => {
 }
 
 export const changePayment = (text, amount, date, category, id) => {
-    console.log(action)
     const action = {
         type: CHANGE_PAYMENT,
         category,
@@ -41,6 +40,7 @@ export const changePayment = (text, amount, date, category, id) => {
             id            
         }
     }
+    console.log(action)
     
     return action
 }
@@ -52,7 +52,6 @@ export const deletePayment = (id, category) => {
         category
 
     }
-    console.log(action)
     return action
 }
 

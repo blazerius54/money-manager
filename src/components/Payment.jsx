@@ -17,14 +17,12 @@ class Payment extends Component {
         }
     }
 
-    handleEditDate () {
+    handleEdit () {
         this.setState({
             text: '',
-            // amount: 0,
-            // date: null,
             isEditing: false,
         });
-
+        this.props.changePayment(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.categ, this.props.item.id)
     }
 
     render () {
@@ -72,7 +70,7 @@ class Payment extends Component {
                         ref={(ref=> {this.dateInput = ref})}
                         />
                         <button
-                        onClick={() => this.handleEditDate()} 
+                        onClick={() => this.handleEdit()} 
                         >save</button>
                     </div>
                     : 

@@ -42,7 +42,6 @@ export function reducer(state = [], action) {
             // bake_cookie('categories', newState)                
             return newState;
         case CHANGE_PAYMENT:
-            console.log(state);
         
             let newPayments = state.categories[action.category].payments.filter(item=>{
                 return item.id !== action.payment.id
