@@ -14,7 +14,6 @@ class Income extends Component {
 
 
     handleEditIncome () {
-        console.log(this.props.item.id)
         this.props.editIncome(this.textInput.value, this.amountInput.value, this.dateInput.value, this.props.item.id)
         this.setState({
             isEditing: false

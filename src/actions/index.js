@@ -16,7 +16,7 @@ export const changeMonth = (date) => {
 export const addPayment = (text, amount, index) => {
     const action = {
         type: ADD_PAYMENT, 
-        index,
+        category: index,
         payment: {
             id: Math.random(),
             paymentText: text,
@@ -25,23 +25,15 @@ export const addPayment = (text, amount, index) => {
 
         }
     }
-    console.log(action)
     return action    
 }
 
-export const changePayment = (text, amount, date, category, id) => {
+export const changePayment = (obj, category) => {
     const action = {
         type: CHANGE_PAYMENT,
         category,
-        payment: {
-            paymentText: text,
-            paymentAmount: Number(amount),
-            date,
-            id            
-        }
+        obj       
     }
-    console.log(action)
-    
     return action
 }
 
@@ -50,7 +42,6 @@ export const deletePayment = (id, category) => {
         type: DELETE_PAYMENT,
         id,
         category
-
     }
     return action
 }
@@ -65,21 +56,19 @@ export const addIncome = (text, amount) => {
             date: new Date()
         }    
     }
-    console.log(action)
     return action
 }
 
 export const editIncome = (text, amount, date, id) => {
     const action = {
         type: EDIT_INCOME,
-        income: {
+        obj: {
             id,        
             text,
             amount: Number(amount),
             date
         }
-    } 
-    console.log(action)
+    }
     return action
 }
 

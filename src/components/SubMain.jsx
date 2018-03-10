@@ -42,7 +42,6 @@ class SubMain extends Component {
         })
         const categ = this.props.categories[index]
         let monthSpent = 0;
-        console.log(index)
         return (
             <div>
                 <Header />
