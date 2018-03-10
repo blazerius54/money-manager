@@ -5,8 +5,6 @@ import Categ from './Categ';
 import Payment from './Payment';
 import Incomes from './Incomes';
 import Header from './Header';
-import { bindActionCreators } from 'redux';
-import { changeMonth } from '../actions/index';
 
 
 class Main extends Component {
@@ -14,6 +12,7 @@ class Main extends Component {
     render () {
         let monthEarned = 0;
         let monthSpent = 0;
+        let years = [];
 
         const filterForDate = (item)=> {
             let date = item.date;
@@ -36,7 +35,7 @@ class Main extends Component {
             monthEarned += item.amount
         );
         return (
-            <div>
+            <div className='app-wrapper'>
                 <Header />
                 <div className='main-content'>
                     <div className='main-content-item'>
@@ -71,8 +70,4 @@ function mapStateToProps (state) {
     }
 }
 
-function mapDispatchToProps (dispatch) {
-    return bindActionCreators({ changeMonth }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps)(Main);

@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Payment from './Payment';
 import Form from './Form';
+import Header from './Header';
 import { bindActionCreators } from 'redux';
-import { addPayment, changeMonth } from '../actions/index';
+import { addPayment } from '../actions/index';
 // import moment from 'moment';
 
 class SubMain extends Component {
@@ -44,13 +45,7 @@ class SubMain extends Component {
         console.log(index)
         return (
             <div>
-                <header className='app-header'>
-                    <Link to='/' className='header-of-app'><h2>Money Manager</h2></Link>
-                    <input type="month"
-                        defaultValue={new Date(this.props.date).getFullYear()+'-0'+(new Date(this.props.date).getMonth()+1)}
-                        onChange={(e)=>this.props.changeMonth(e.target.value)}
-                    />
-                </header>
+                <Header />
                 <div className='sub-main'>
                     <div>
                         <p>
@@ -96,7 +91,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-    return bindActionCreators({ addPayment, changeMonth }, dispatch)
+    return bindActionCreators({ addPayment }, dispatch)
 }
 
 

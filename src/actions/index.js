@@ -2,6 +2,9 @@ import { CHANGE_MONTH, ADD_PAYMENT, CHANGE_PAYMENT, DELETE_PAYMENT,
         ADD_INCOME, EDIT_INCOME, DELETE_INCOME } from '../const/index';
 
 export const changeMonth = (date) => {
+    if(isNaN(new Date(date).getMonth()) ) {
+        date = new Date(Date.now()).getFullYear()+'-01';
+    } 
     const action = {
         type: CHANGE_MONTH,
         date
@@ -27,7 +30,6 @@ export const addPayment = (text, amount, index) => {
 }
 
 export const changePayment = (text, amount, date, category, id) => {
-    // console.log(action)
     const action = {
         type: CHANGE_PAYMENT,
         category,
@@ -38,6 +40,7 @@ export const changePayment = (text, amount, date, category, id) => {
             id            
         }
     }
+    console.log(action)
     
     return action
 }
@@ -49,7 +52,6 @@ export const deletePayment = (id, category) => {
         category
 
     }
-    console.log(action)
     return action
 }
 
