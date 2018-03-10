@@ -1,4 +1,5 @@
-export let month = new Date(Date.now()).getMonth();
+// export let month = new Date(Date.now()).getMonth();
+export let month = new Date(Date.now());
 
 let categories = [
     {   
@@ -39,7 +40,7 @@ let categories = [
                 categoryName: 'food',   
                 paymentText: 'Печенье',
                 paymentAmount: 10,
-                date: 'Fri Mar 25 2018 11:10:19 GMT+0700 (RTZ 6 (зима))'
+                date: 'Fri Mar 25 2017 11:10:19 GMT+0700 (RTZ 6 (зима))'
             },
             {   
                 id: 5,

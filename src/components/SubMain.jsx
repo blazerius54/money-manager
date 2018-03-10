@@ -40,7 +40,7 @@ class SubMain extends Component {
         })
         const categ = this.props.categories[index]
         let monthSpent = 0;
-        // console.log(categ)
+        console.log(index)
         return (
             
             <div>
@@ -68,7 +68,7 @@ class SubMain extends Component {
                         }).map((item, i)=>{
                             monthSpent += item.paymentAmount 
                             return (
-                                <Payment key={i} item={item} index={index} i={i} categ={categ}/>
+                                <Payment key={i} item={item} index={index} i={i} categ={index}/>
                             )
                         })
                     }

@@ -49,6 +49,7 @@ export const deletePayment = (id, category) => {
         category
 
     }
+    console.log(action)
     return action
 }
 

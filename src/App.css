@@ -1,7 +1,26 @@
+.header-of-app {
+    text-align: center;
+}
+
 .app-container {
     display: flex;
     /* justify-content: center; */
     flex-direction: column;
+}
+
+.main-content {
+    display: flex;
+    align-items: baseline;
+}
+
+.main-content > * {
+    flex: 1 0 20%;
+}
+
+.main-content-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .categ-container {
@@ -19,23 +38,19 @@
 }
 
 .payments-container {
+    list-style-type: none;
     width: 20%;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
 .payment-container {
-    list-style-type: none;
     display: flex;
     justify-content: space-between;
     border-bottom: 2px solid grey;
-}
-
-.main-content {
-    display: flex;
-    align-items: baseline;
-}
-
-.main-content > * {
-    flex: 1 0 20%;
 }
 
 .div-form-inputs {
@@ -46,4 +61,8 @@
 .div-form-inputs input {
     max-width: 50%;
     margin-bottom: 5px;
+}
+
+.div-category-header * {
+    display: inline;
 }

@@ -24,7 +24,7 @@ class App extends Component {
       <Provider store={store}>
       <div className="">
         <div className="app-container">
-          <Link to='/'><h2>Money Manager</h2></Link>
+          <Link to='/' className='header-of-app'><h2>Money Manager</h2></Link>
           <Route exact path='/' component={Main} />
           <Route exact path='/:name' component={SubMain} />
 
