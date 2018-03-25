@@ -6,7 +6,7 @@ class Form extends Component {
         e.preventDefault();
         this.props.sendFormData(this.props.index);
         this.inputText.value = '';
-        this.inputAmount.value = 0;
+        this.inputAmount.value = 2;
     }
 
     render() {
