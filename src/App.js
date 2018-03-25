@@ -7,6 +7,7 @@ import { Route, Switch, Router } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import Main from './components/Main';
 import SubMain from './components/SubMain';
+import Header from './components/Header';
 
 import store from './store/index';
 import { Provider } from 'react-redux';
@@ -23,6 +24,7 @@ class App extends Component {
       <Switch>
         <Provider store={store}>
           <div className="app-container">
+          <Header />
             <Route exact path='/' component={Main} />
             <Route exact path='/:name' component={SubMain} />
           </div>

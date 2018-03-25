@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Categ from './Categ';
 import Payment from './Payment';
 import Incomes from './Incomes';
-import Header from './Header';
 
 
 class Main extends Component {
@@ -12,7 +11,6 @@ class Main extends Component {
     render () {
         let monthEarned = 0;
         let monthSpent = 0;
-        let years = [];
 
         const filterForDate = (item)=> {
             let date = item.date;
@@ -25,25 +23,33 @@ class Main extends Component {
             }
         }
 
-        this.props.categories.forEach((item)=>{
-            item.payments.filter(filterForDate).map(item=>{
+        // this.props.categories.forEach((item)=>{
+        //     item.payments.filter(filterForDate).map(item=>{
+        //         return monthSpent += item.paymentAmount;
+        //     })
+        // })
+
+        this.props.filtredMonth.forEach((item)=>{
+            item.map(item=>{
                 return monthSpent += item.paymentAmount;
             })
         })
     
         this.props.incomes.filter(filterForDate).forEach(item=>
             monthEarned += item.amount
+            
         );
+
         return (
             <div className='app-wrapper'>
-                <Header />
+                {/* <Header /> */}
                 <div className='main-content'>
                     <div className='main-content-item'>
                         <ul className='payments-container'>
                             {
                                 this.props.categories.map((category, index)=>{
                                     return (
-                                        <Categ key={index} index={index} categ={category} indexCat={index} date={this.props.date}/>
+                                        <Categ key={index} index={index} categ={category} indexCat={index} date={this.props.date} monthSpent={monthSpent}/>
                                     ) 
                                 })
                             }
@@ -67,6 +73,8 @@ function mapStateToProps (state) {
         incomes: state.incomes,
         categories: state.categories,
         date: state.date,
+        filtredMonth: state.filtredMonth
+        
     }
 }
 

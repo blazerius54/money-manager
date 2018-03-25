@@ -1,9 +1,11 @@
 .category {
     margin-bottom: 20px;
     padding: 15px;
-    border: solid 3px rgb(95, 206, 75);
-    border-radius: 15px;
-     
+    overflow: hidden;
+    border: solid 2px $main-color;
+    @include border-radius(15px);
+    background: $gradient-background;
+    transition: all 1s ease;
     .div-category-header {
         font-size: 105%;
         font-weight: 600;

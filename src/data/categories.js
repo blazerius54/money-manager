@@ -1,5 +1,6 @@
 export let date = new Date(Date.now());
 
+
 let categories = [
     {   
         path: 'food',
@@ -121,3 +122,18 @@ let categories = [
 ]
 
 export default categories; 
+
+export let filtredMonth = categories.map(item => {
+    return item.payments.filter(item=>{
+        let date2 = item.date;
+        let year = new Date(date2).getFullYear();
+        let month = new Date(date2).getMonth();
+        if(month === new Date(date).getMonth() &&
+            year === new Date(date).getFullYear()
+        ){
+            return item
+        }
+    })
+})
+
+// export let filtredMonth = categories

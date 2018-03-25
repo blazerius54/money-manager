@@ -9,24 +9,53 @@ export function reducer(state = [], action) {
     }
     switch (action.type) {
         case CHANGE_MONTH:
-            console.log(action)      
             newState = {
                 ...state,
-                date: action.date
+                date: action.date,
+                filtredMonth: state.categories.map(item => {
+                    return item.payments.filter(item=>{
+                        let date = item.date;
+                        let year = new Date(date).getFullYear();
+                        let month = new Date(date).getMonth();
+                        if(month === new Date(action.date).getMonth() &&
+                            year === new Date(action.date).getFullYear()
+                        ){
+                            return item
+                        }
+                    })
+                })
             }
+            // console.log(newState)      
             // bake_cookie('categories', newState);            
             
             return newState;
         case ADD_PAYMENT: 
         case DELETE_PAYMENT:
         case CHANGE_PAYMENT:
-            return {
+        console.log(action)
+        
+            newState = {
                 ...state, 
                 categories: [
                     ...state.categories.slice(0,action.category),
                     state.categories[action.category] =  newCateg(state.categories[action.category], action),
-                    ...state.categories.slice(action.category+1),]
+                    ...state.categories.slice(action.category+1)
+                ],
+                filtredMonth: state.categories.map(item => {
+                    return item.payments.filter(item=>{
+                        let date2 = item.date;
+                        let year = new Date(date2).getFullYear();
+                        let month = new Date(date2).getMonth();
+                        if(month === new Date(state.date).getMonth() &&
+                            year === new Date(state.date).getFullYear()
+                        ){
+                            return item
+                        }
+                    })
+                })
+                    
             }
+            return newState
         case ADD_INCOME: 
             newState = {
                 ...state,

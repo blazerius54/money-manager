@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+$main-font: 'Roboto', sans-serif;
+$main-color: rgba(168, 168, 168, 0.3);
+$gradient-background: -webkit-linear-gradient(
+                            top, 
+                            $main-color 00%, 
+                            rgb(238, 238, 238) 20%, 
+                            rgb(238, 238, 238) 80%, 
+                            $main-color 100%
+                        );
+$main-border: solid 2px rgba(168, 168, 168, 0.5);

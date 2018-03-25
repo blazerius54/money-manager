@@ -1,5 +1,11 @@
 .payment-container {
+    // width: 50%;
     display: flex;
     justify-content: space-between;
-    border-bottom: 2px solid grey;
+    border: $main-border;        
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: inset 0px 0px 15px 2px rgb(223, 223, 223);
 }

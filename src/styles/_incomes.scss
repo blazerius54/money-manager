@@ -1,0 +1,10 @@
+.incomes-container {
+    border-radius: 15px;
+    margin-right: 30px;
+    border: $main-border;
+    background: $gradient-background;
+
+    .payment-container {
+        border: $main-border;        
+    }
+}

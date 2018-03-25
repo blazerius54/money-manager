@@ -1,15 +1,29 @@
 .app-header {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 50px;
-    margin-right: 50px;
+    padding-left: 50px; 
+    padding-right: 50px; 
+    padding-bottom: 10px; 
+    margin-bottom: 30px;
+    background-image: url('images/doodles.png');
+    border-bottom: 2px solid rgb(190, 190, 190);
 
     .logo-of-app {
-        flex: 1 1 40%;
+        flex: 1 1;
+
+        h2 {
+            border-bottom: 2px solid rgb(221, 221, 221);
+            box-shadow: 0px 8px 6px -4px rgb(190, 190, 190);            
+            display: inline;
+            background: -webkit-radial-gradient(center, ellipse cover, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 50%,rgba(255,255,255,0) 90%); 
+            font-size: 180%;
+            padding: 10px;        
+        }
     }
     .input-date{
-        flex: 1 1 57%;
+        flex: 1 1 20%;
         display: flex;
     }
 
@@ -19,45 +33,34 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        // margin-left: 2px;
+        margin-left: 45px;
         font-size: 130%;
+
         img {
             
-            opacity: 0.1;
+            opacity: 0.5;
             transform: scale(0.8);
-            transition: all 1s ease;
+            transition: all 0.5s ease;
         }
         
-        img:first-of-type {
-            opacity: 0.1;
-            transform: scale(0.8) rotate(180deg);
+        img:hover {
+            opacity: 1;
+            transform: scale(1.1);
         }
 
-        img:first-of-type:hover, img:hover {
-            opacity: 1;
-            transform: scale(1.2) rotate(180)
-        }
         p {
             margin: 10px;
         }
 
     }
 
-    .date-container:last-of-type {
-        margin-top: 5px;
-        
-    }
-            .year {
-                    font-size: 80%;
-                
-            }
 }
 
 @media screen and (max-width: 768px) {
     .app-header {
       justify-content: space-around !important;
 
-        .input-date{
+        .input-date {
             flex: 0;
         }
     }
