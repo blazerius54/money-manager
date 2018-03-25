@@ -57,24 +57,6 @@ class Categ extends Component {
                 {
                     this.state.isVisible? 
                     <div className='category-container-content'>
-                    {/* {
-                        this.props.categ.payments.filter((item, index)=>{
-                            let date = item.date;
-                            let year = new Date(date).getFullYear();
-                            let month = new Date(date).getMonth();
-                            if(month === new Date(this.props.date).getMonth() &&
-                                year === new Date(this.props.date).getFullYear()
-                            ){
-                                return item
-                            }
-                        }).sort((a, b) => {
-                            let date1 = new Date(a.date);
-                            let date2 = new Date(b.date);
-                            return date1 - date2;
-                        }).map((item, i)=>{
-                            return <Payment  item={item} key={i} categ={this.props.indexCat}/>
-                        })
-                    }  */}
 
                     {
                         this.props.filtredMonth[this.props.indexCat].sort((a, b) => {

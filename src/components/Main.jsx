@@ -23,12 +23,6 @@ class Main extends Component {
             }
         }
 
-        // this.props.categories.forEach((item)=>{
-        //     item.payments.filter(filterForDate).map(item=>{
-        //         return monthSpent += item.paymentAmount;
-        //     })
-        // })
-
         this.props.filtredMonth.forEach((item)=>{
             item.map(item=>{
                 return monthSpent += item.paymentAmount;

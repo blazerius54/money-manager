@@ -52,34 +52,17 @@ class SubMain extends Component {
                 </div>
                 <ul className='payments-container'>
                     {
-                        this.props.filtredMonth[index].map((item, i)=>{
-                            monthSpent += item.paymentAmount 
-                            return (
-                                <Payment key={i} item={item} index={index} i={i} categ={index}/>
-                            )
-                        })
-                    }
-                    {/* {
-                        categ.payments.sort((a, b) => {
+                        this.props.filtredMonth[index].sort((a, b) => {
                             let date1 = new Date(a.date);
                             let date2 = new Date(b.date);
                             return date1 - date2;
-                        }).filter(item=>{
-                            let date = item.date;
-                            let year = new Date(date).getFullYear();
-                            let month = new Date(date).getMonth();
-                            if(month === new Date(this.props.date).getMonth() &&
-                                year === new Date(this.props.date).getFullYear()
-                            ) {
-                                return item
-                            }
                         }).map((item, i)=>{
                             monthSpent += item.paymentAmount 
                             return (
                                 <Payment key={i} item={item} index={index} i={i} categ={index}/>
                             )
                         })
-                    } */}
+                    }
                 </ul>
                 <p>Потрачено за месяц: { monthSpent}</p>
                 <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index}/>
