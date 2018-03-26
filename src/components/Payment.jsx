@@ -30,7 +30,6 @@ class Payment extends Component {
     }
 
     render () {
-        console.log(this.props.item)
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
         return (

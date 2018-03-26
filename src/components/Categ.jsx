@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Payment from './Payment';
 import { connect } from 'react-redux';
 import AnimateHeight from 'react-animate-height';
+import Payment from './Payment';
+import catArrow from '../images/cat-arrow.png';
 
 class Categ extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            isVisible: false,
-            containerStyleClose: {
-                height: 90,
-            },
-            containerStyleOpen: {
-                height: 'auto'
-            },
             height: 50
         }
     }
@@ -29,48 +23,38 @@ class Categ extends Component {
         })
         
         return (
-            <li className={this.props.categ.path + ' category'} 
-            // style={!isVisible? containerStyleClose : containerStyleOpen}
-            >
-            <AnimateHeight
-          duration={ 500 }
-          height={ height } // see props documentation bellow
-        >
-                <div className='div-category-header'>
-                    <Link to={path}>
-                            <p>{name}: {spent}</p>
-                    </Link>
-                            <p onClick={()=>{
+            <li className={this.props.categ.path + ' category'}>
+                <AnimateHeight
+                duration={ 500 }
+                height={ height }
+                >
+                    <div className='div-category-header'
+                        onClick={()=>{
                                     this.setState({
-                                        isVisible: !this.state.isVisible,
                                         height: height === 50? 'auto' : 50,
                                     })
                                 }
-                            }>
-                                o
-                            </p>
-                </div>
-                <div className='category-container-content'>
-
-                    {
-                        this.props.filtredMonth[this.props.indexCat].sort((a, b) => {
-                            let date1 = new Date(a.date);
-                            let date2 = new Date(b.date);
-                            return date1 - date2;
-                        }).map((item, i)=>{
-                            // monthSpent += item.paymentAmount 
-                            return (
-                                <Payment  item={item} key={i} categ={this.props.indexCat}/>
-                                
-                            )
-                        })
-                    }
+                            }
+                    >
+                        <Link className='categ-title' to={path}>
+                                <p>{name}: {spent}</p>
+                        </Link>
+                        <img src={catArrow} className='arrow-img' style={height!==50? {transform:'rotate(180deg)'} : {}  } />
                     </div>
-                {/* {
-                    this.state.isVisible? 
-                     : ''
-                } */}
-            </AnimateHeight>
+                    <div className='category-container-content'>
+                        {
+                            this.props.filtredMonth[this.props.indexCat].sort((a, b) => {
+                                let date1 = new Date(a.date);
+                                let date2 = new Date(b.date);
+                                return date1 - date2;
+                            }).map((item, i)=>{
+                                return (
+                                    <Payment  item={item} key={i} categ={this.props.indexCat}/>
+                                )
+                            })
+                        }
+                        </div>
+                </AnimateHeight>
             </li>
         
         )

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Payment from './Payment';
 import Form from './Form';
-import Header from './Header';
 import { bindActionCreators } from 'redux';
 import { addPayment } from '../actions/index';
 // import moment from 'moment';
@@ -42,7 +40,6 @@ class SubMain extends Component {
         })
         const categ = this.props.categories[index];
         let monthSpent = 0;
-        console.log(this.props.filtredMonth[index]);
         return (
             <div className='sub-main'>
                 <div>
@@ -72,7 +69,6 @@ class SubMain extends Component {
 }
 
 function mapStateToProps (state) {
-    console.log(state)
     return {
         categories: state.categories,
         date: state.date,

@@ -27,8 +27,13 @@ ul {
 }
 
 h1, p, a {
-    color: rgb(77, 77, 77);
+    color: $font-color;
 }
+
+*:focus {
+    outline:none !important;
+}
+
 .app-wrapper {
     width: 100%;
     // padding: 20px;
@@ -63,4 +68,9 @@ h1, p, a {
 
 .info p {
     margin-left: 3px;
+}
+
+.title {
+    font-size: 100%;
+    font-weight: 600;
 }

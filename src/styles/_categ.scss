@@ -1,11 +1,9 @@
 .category {
     margin-bottom: 20px;
     padding: 15px;
-    // overflow: hidden;
     border: solid 2px $main-color;
     @include border-radius(15px);
     background: $gradient-background;
-    // transition: height 1s ease;
     overflow: hidden;
 
     .div-category-header {
@@ -14,8 +12,21 @@
         // border-bottom: solid 3px #888;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         cursor: pointer;
-        
+
+        .categ-title:hover {
+            // flex: 1 0;
+            p {
+                color: $hover-font-color;
+            }
+        }
+
+        .arrow-img {
+            width: 24px;
+            height: 24px;
+            transition: all 1s ease;
+        }
     }
 
     .category-container-content {

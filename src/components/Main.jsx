@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Categ from './Categ';
-import Payment from './Payment';
 import Incomes from './Incomes';
 
 
@@ -39,6 +37,7 @@ class Main extends Component {
                 {/* <Header /> */}
                 <div className='main-content'>
                     <div className='main-content-item'>
+                    <p className='title'>Расходы:</p>
                         <ul className='payments-container'>
                             {
                                 this.props.categories.map((category, index)=>{
