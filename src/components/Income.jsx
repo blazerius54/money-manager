@@ -3,6 +3,10 @@ import moment from 'moment';
 import { editIncome, deleteIncome } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Button from './Button';
+import pen from '../images/pen.png'
+import trashBin from '../images/trash.png'
+
 
 class Income extends Component {
     constructor (props) {
@@ -20,14 +24,16 @@ class Income extends Component {
         })
     }
 
+    handleDeleteIncome () {
+        this.props.deleteIncome(this.props.item.id)
+    }
+
     render () {
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
-        return <div>
-            <li className="payment-container">
-              <div>
-                
-                    {
+        return (
+              <div className="payment-container">
+                {
                         this.state.isEditing === true?
                         <div>
                             <input 
@@ -42,45 +48,38 @@ class Income extends Component {
                             defaultValue={this.props.item.amount}
                             ref={(ref=> {this.amountInput = ref})}
                             />
+                            <input 
+                            type='date' 
+                            placeholder="date"
+                            id='datePicker'
+                            defaultValue={dafaultDate}
+                            ref={(ref=> {this.dateInput = ref})}
+                            />
+                            <Button handleSmth={this.handleEditIncome.bind(this)} text={'save'} img={pen}/>
+                            
                         </div>
                         :
-                        <div>
-                            <p>{this.props.item.text}: {this.props.item.amount}</p>
-                            <button onClick={()=>this.props.deleteIncome(this.props.item.id)}>Delete</button>
-                            
+                        <div className='info-wrapper'>
+                            <div className='info-container'>
+                                <p className='text-container'>{this.props.item.text}: {this.props.item.amount}</p>
+                                <p
+                                className='date-container'
+                                onClick={() => this.setState({ 
+                                    isEditing: true,
+                                })}
+                                >
+                                    {moment(new Date(this.props.item.date)).format(
+                                    "Do MMM YYYY"
+                                    )}
+                                </p>
+                            </div>
+                            <div className='btn-container'>
+                                <Button handleSmth={this.handleDeleteIncome.bind(this)} text={'delete'} img={trashBin}/>
+                            </div>
                         </div>                         
                     }
-                
               </div>
-              <div>
-                {
-                    this.state.isEditing === true ? 
-                    <div>
-                        <input 
-                        type='date' 
-                        placeholder="date"
-                        id='datePicker'
-                        defaultValue={dafaultDate}
-                        ref={(ref=> {this.dateInput = ref})}
-                        />
-                        <button
-                        onClick={() => this.handleEditIncome()} 
-                        >save</button>
-                    </div>
-                    : 
-                    <p
-                        onClick={() => this.setState({ 
-                            isEditing: true,
-                        })}
-                    >
-                        {moment(new Date(this.props.item.date)).format(
-                        "Do MMM YYYY"
-                        )}
-                    </p>
-                }
-              </div>
-            </li>
-          </div>;
+        )
     }
 }
 

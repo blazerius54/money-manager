@@ -15,10 +15,10 @@ class Categ extends Component {
 
     render () {
         const { name, path } = this.props.categ;
-        const { isVisible, containerStyleClose, containerStyleOpen, height } = this.state;
+        const { height } = this.state;
         let spent = 0;
 
-        this.props.filtredMonth[this.props.indexCat].map((item, i)=>{
+        this.props.filtredMonth[this.props.indexCat].forEach((item, i)=>{
             spent += item.paymentAmount;
         })
         
@@ -39,7 +39,7 @@ class Categ extends Component {
                         <Link className='categ-title' to={path}>
                                 <p>{name}: {spent}</p>
                         </Link>
-                        <img src={catArrow} className='arrow-img' style={height!==50? {transform:'rotate(180deg)'} : {}  } />
+                        <img src={catArrow} alt='o' className='arrow-img' style={height!==50? {transform:'rotate(180deg)'} : {}  } />
                     </div>
                     <div className='category-container-content'>
                         {

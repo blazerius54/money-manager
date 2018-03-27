@@ -2,3 +2,17 @@
     list-style-type: none;
     width: 80%;
 }
+
+.main-content-item {
+    .text {
+        font-size: 90%;
+        margin-bottom: 0px;
+    }
+    .number {
+        font-weight: 600;
+    }
+}
+
+.balance {
+    margin-top: 50px;
+}

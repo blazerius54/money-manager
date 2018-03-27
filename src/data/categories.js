@@ -135,5 +135,3 @@ export let filtredMonth = categories.map(item => {
         }
     })
 })
-
-// export let filtredMonth = categories

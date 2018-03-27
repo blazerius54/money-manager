@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 $main-font: 'Roboto', sans-serif;
-$font-color: rgb(77, 77, 77);
+$font-color: rgb(85, 85, 85);
 $hover-font-color: rgb(19, 19, 19);
 $main-color: rgba(168, 168, 168, 0.3);
+$danger-color: rgba(206, 67, 67, 0.294);
+$save-color: rgba(67, 206, 67, 0.294);
 $gradient-background: -webkit-linear-gradient(
                             top, 
                             $main-color 00%, 

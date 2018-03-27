@@ -49,10 +49,10 @@ class Main extends Component {
                         </ul>
                         
                     </div>
-                    <div className="main-content-item">
-                        <p>Заработано за месяц: {monthEarned}</p>
-                        <p>Потрачено за месяц: {monthSpent}</p>
-                        <p>Баланс: {monthEarned - monthSpent}</p>
+                    <div className="main-content-item balance">
+                        <p className='text'>Заработано за месяц:</p> <p className='number'>{monthEarned}</p>
+                        <p className='text'>Потрачено за месяц:</p> <p className='number'>{monthSpent}</p>
+                        <p className='text'>Баланс:</p> <p className='number'>{monthEarned - monthSpent}</p>
                     </div>
                     <Incomes incomes={this.props.incomes} month={this.props.date}/>
                 </div>
