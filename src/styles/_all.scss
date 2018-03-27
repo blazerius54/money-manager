@@ -43,25 +43,8 @@ h1, p, a {
 
 .app-container {
     display: flex;
-    /* justify-content: center; */
     flex-direction: column;
     align-items: center;
-}
-
-.main-content {
-    display: flex;
-    align-items: flex-start;
-}
-
-.main-content > * {
-    flex: 1 0 30%;
-}
-
-.main-content-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // justify-content: flex-end
 }
 
 .info {

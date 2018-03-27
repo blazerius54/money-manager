@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AnimateHeight from 'react-animate-height';
 import Payment from './Payment';
 import catArrow from '../images/cat-arrow.png';
+import notePad from '../images/new.png';
 
 class Categ extends Component {
     constructor (props) {
@@ -37,7 +38,8 @@ class Categ extends Component {
                             }
                     >
                         <Link className='categ-title' to={path}>
-                                <p>{name}: {spent}</p>
+                                <img src={notePad} alt="add new"/>
+                                <p>{name}: {spent} &#8381;</p>
                         </Link>
                         <img src={catArrow} alt='o' className='arrow-img' style={height!==50? {transform:'rotate(180deg)'} : {}  } />
                     </div>

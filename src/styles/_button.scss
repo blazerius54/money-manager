@@ -27,3 +27,7 @@
 .save {
         background-color: $save-color;
 }
+
+.disabled:hover {
+        transform: scale(0.8)
+}

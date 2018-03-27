@@ -43,7 +43,7 @@ class SubMain extends Component {
         return (
             <div className='sub-main'>
                 <div>
-                    <p>
+                    <p className='sub-main-info'>
                         {categ.name} 
                     </p>
                 </div>
@@ -61,7 +61,7 @@ class SubMain extends Component {
                         })
                     }
                 </ul>
-                <p>Потрачено за месяц: { monthSpent}</p>
+                <p className='sub-main-info'>Потрачено за месяц: { monthSpent} &#8381;</p>
                 <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index}/>
             </div>
         )

@@ -15,9 +15,28 @@
         align-items: center;
         cursor: pointer;
 
+        .categ-title {
+            display: flex;
+            align-items: center;
+            img {
+                @include transition(0.2s);            
+                width: 25px;
+                height: 25px;
+                margin-right: 5px;
+            }
+            p {
+                @include transition(0.2s);            
+            }
+        }
+
         .categ-title:hover {
             // flex: 1 0;
+            img {
+                transform: scale(1.1);
+            }
+
             p {
+                transform: scale(1.05);
                 color: $hover-font-color;
             }
         }
@@ -27,10 +46,26 @@
             height: 24px;
             @include transition(0.5s);
         }
+
+        .arrow-img:hover {
+            transform: scale(1.2);
+            
+        }
     }
 
     .category-container-content {
         display: flex;
         flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .category {
+        .div-category-header {
+            .categ-title {
+                font-size: 80%;
+                margin-bottom: 15px;
+            }
+        }
     }
 }

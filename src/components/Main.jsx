@@ -38,7 +38,7 @@ class Main extends Component {
                 <div className='main-content'>
                     <div className='main-content-item'>
                     <p className='title'>Расходы:</p>
-                        <ul className='payments-container'>
+                        <ul className='payments-container make-scroll'>
                             {
                                 this.props.categories.map((category, index)=>{
                                     return (
@@ -49,10 +49,10 @@ class Main extends Component {
                         </ul>
                         
                     </div>
-                    <div className="main-content-item balance">
-                        <p className='text'>Заработано за месяц:</p> <p className='number'>{monthEarned}</p>
-                        <p className='text'>Потрачено за месяц:</p> <p className='number'>{monthSpent}</p>
-                        <p className='text'>Баланс:</p> <p className='number'>{monthEarned - monthSpent}</p>
+                    <div className="main-content-item main-balance">
+                        <p className='text'>Баланс:</p> <p className='number'>{monthEarned - monthSpent} &#8381;</p>
+                        <p className='text'>Заработано за месяц:</p> <p className='number'>{monthEarned} &#8381;</p>
+                        <p className='text'>Потрачено за месяц:</p> <p className='number'>{monthSpent} &#8381;</p>
                     </div>
                     <Incomes incomes={this.props.incomes} month={this.props.date}/>
                 </div>

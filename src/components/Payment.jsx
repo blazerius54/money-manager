@@ -15,6 +15,12 @@ class Payment extends Component {
         }
     }
 
+    handleSaving () {
+        this.setState({ 
+            isEditing: true,
+        })
+    }
+
     handleEdit () {
         this.setState({
             isEditing: false,
@@ -66,6 +72,7 @@ class Payment extends Component {
                             </div>
                             <div className='btn-container'>
                                 <Button handleSmth={this.handleEdit.bind(this)} text={'save'} img={pen}/>
+                                <Button  text={'delete'} img={trashBin}/>
                             </div>
                         </div>
                         :
@@ -73,12 +80,10 @@ class Payment extends Component {
                             <div className='info-container'>
                                 <p
                                 className='text-container'
-                                >{this.props.item.paymentText}: {this.props.item.paymentAmount}</p>
+                                >{this.props.item.paymentText}: {this.props.item.paymentAmount} &#8381;</p>
                                 <p
                                 className='date-container'
-                                onClick={() => this.setState({ 
-                                    isEditing: true,
-                                })}
+                                
                                 >
                                     {moment(new Date(this.props.item.date)).format(
                                     "Do MMM YYYY"
@@ -86,6 +91,7 @@ class Payment extends Component {
                                 </p>
                             </div>
                             <div className='btn-container'>
+                                <Button handleSmth={this.handleSaving.bind(this)} text={'save'} img={pen}/>
                                 <Button handleSmth={this.handleDelete.bind(this)} text={'delete'} img={trashBin}/>
                             </div>
                         </div>                         
