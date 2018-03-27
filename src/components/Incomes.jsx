@@ -9,7 +9,7 @@ class Incomes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFiltred: false,
+      // isFiltred: false,
       month: new Date(Date.now()).getMonth(),
       text: "",
       amount: 0
@@ -33,7 +33,7 @@ sendFormData () {
 }
   render() {
     return <div className='main-content-item'>
-        <p>Доходы:</p>
+        <p className='title'>Доходы:</p>
         <ul className="payments-container">
           {
             this.props.incomes.sort((a, b) => {
@@ -54,8 +54,6 @@ sendFormData () {
                 <Income 
                   key={index} 
                   item={item} 
-                  sendFormData={this.sendFormData.bind(this)} 
-                  onChangeForm={this.onChangeForm.bind(this)} 
                 />
               )  
             })

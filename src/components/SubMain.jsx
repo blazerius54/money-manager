@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Payment from './Payment';
 import Form from './Form';
-import Header from './Header';
 import { bindActionCreators } from 'redux';
 import { addPayment } from '../actions/index';
 // import moment from 'moment';
@@ -42,46 +40,28 @@ class SubMain extends Component {
         })
         const categ = this.props.categories[index];
         let monthSpent = 0;
-        console.log(this.props.filtredMonth[index]);
         return (
             <div className='sub-main'>
                 <div>
-                    <p>
+                    <p className='sub-main-info'>
                         {categ.name} 
                     </p>
                 </div>
                 <ul className='payments-container'>
                     {
-                        this.props.filtredMonth[index].map((item, i)=>{
-                            monthSpent += item.paymentAmount 
-                            return (
-                                <Payment key={i} item={item} index={index} i={i} categ={index}/>
-                            )
-                        })
-                    }
-                    {/* {
-                        categ.payments.sort((a, b) => {
+                        this.props.filtredMonth[index].sort((a, b) => {
                             let date1 = new Date(a.date);
                             let date2 = new Date(b.date);
                             return date1 - date2;
-                        }).filter(item=>{
-                            let date = item.date;
-                            let year = new Date(date).getFullYear();
-                            let month = new Date(date).getMonth();
-                            if(month === new Date(this.props.date).getMonth() &&
-                                year === new Date(this.props.date).getFullYear()
-                            ) {
-                                return item
-                            }
                         }).map((item, i)=>{
                             monthSpent += item.paymentAmount 
                             return (
                                 <Payment key={i} item={item} index={index} i={i} categ={index}/>
                             )
                         })
-                    } */}
+                    }
                 </ul>
-                <p>Потрачено за месяц: { monthSpent}</p>
+                <p className='sub-main-info'>Потрачено за месяц: { monthSpent} &#8381;</p>
                 <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index}/>
             </div>
         )
@@ -89,7 +69,6 @@ class SubMain extends Component {
 }
 
 function mapStateToProps (state) {
-    console.log(state)
     return {
         categories: state.categories,
         date: state.date,

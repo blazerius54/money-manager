@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Categ from './Categ';
-import Payment from './Payment';
 import Incomes from './Incomes';
 
 
@@ -23,12 +21,6 @@ class Main extends Component {
             }
         }
 
-        // this.props.categories.forEach((item)=>{
-        //     item.payments.filter(filterForDate).map(item=>{
-        //         return monthSpent += item.paymentAmount;
-        //     })
-        // })
-
         this.props.filtredMonth.forEach((item)=>{
             item.map(item=>{
                 return monthSpent += item.paymentAmount;
@@ -45,7 +37,8 @@ class Main extends Component {
                 {/* <Header /> */}
                 <div className='main-content'>
                     <div className='main-content-item'>
-                        <ul className='payments-container'>
+                    <p className='title'>Расходы:</p>
+                        <ul className='payments-container make-scroll'>
                             {
                                 this.props.categories.map((category, index)=>{
                                     return (
@@ -56,10 +49,10 @@ class Main extends Component {
                         </ul>
                         
                     </div>
-                    <div className="main-content-item">
-                        <p>Заработано за месяц: {monthEarned}</p>
-                        <p>Потрачено за месяц: {monthSpent}</p>
-                        <p>Баланс: {monthEarned - monthSpent}</p>
+                    <div className="main-content-item main-balance">
+                        <p className='text'>Баланс:</p> <p className='number'>{monthEarned - monthSpent} &#8381;</p>
+                        <p className='text'>Заработано за месяц:</p> <p className='number'>{monthEarned} &#8381;</p>
+                        <p className='text'>Потрачено за месяц:</p> <p className='number'>{monthSpent} &#8381;</p>
                     </div>
                     <Incomes incomes={this.props.incomes} month={this.props.date}/>
                 </div>

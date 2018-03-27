@@ -3,7 +3,9 @@ import moment from 'moment';
 import { changePayment, deletePayment } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import Button from './Button';
+import pen from '../images/pen.png'
+import trashBin from '../images/trash.png'
 
 class Payment extends Component {
     constructor (props) {
@@ -11,6 +13,12 @@ class Payment extends Component {
         this.state = {
             isEditing: false,
         }
+    }
+
+    handleSaving () {
+        this.setState({ 
+            isEditing: true,
+        })
     }
 
     handleEdit () {
@@ -29,62 +37,65 @@ class Payment extends Component {
         )
     }
 
+    handleDelete () {
+        this.props.deletePayment(this.props.item.id, this.props.categ)
+    }
+
     render () {
-        console.log(this.props.item)
         //форматируем дату для инпута 
         let dafaultDate = new Date(this.props.item.date).getFullYear()+ '-' +("0" + (new Date(this.props.item.date).getMonth() + 1)).slice(-2) +'-'+("0" + (new Date(this.props.item.date).getDate())).slice(-2)
         return (
             <div className="payment-container">
                     {
                         this.state.isEditing === true?
-                        <div>
-                            <input 
-                            type='text' 
-                            placeholder="text"
-                            defaultValue={this.props.item.paymentText}
-                            ref={(ref=> {this.textInput = ref})}
-                            />
-                            <input 
-                            type='text' 
-                            placeholder="amount"
-                            defaultValue={this.props.item.paymentAmount}
-                            ref={(ref=> {this.amountInput = ref})}
-                            />
+                        <div className='edit-inputs'>
+                            <div className='inputs-container'>
+                                <input 
+                                type='text' 
+                                placeholder="text"
+                                defaultValue={this.props.item.paymentText}
+                                ref={(ref=> {this.textInput = ref})}
+                                />
+                                <input 
+                                type='text' 
+                                placeholder="amount"
+                                defaultValue={this.props.item.paymentAmount}
+                                ref={(ref=> {this.amountInput = ref})}
+                                />
+                                <input 
+                                type='date' 
+                                placeholder="date"
+                                id='datePicker'
+                                defaultValue={dafaultDate}
+                                ref={(ref=> {this.dateInput = ref})}
+                                />
+                            </div>
+                            <div className='btn-container'>
+                                <Button handleSmth={this.handleEdit.bind(this)} text={'save'} img={pen}/>
+                                <Button  text={'delete'} img={trashBin}/>
+                            </div>
                         </div>
                         :
-                        <div>
-                            <p>{this.props.item.paymentText}: {this.props.item.paymentAmount}</p>
-                            <button onClick={()=>this.props.deletePayment(this.props.item.id, this.props.categ)}>Delete</button>
+                        <div className='info-wrapper'>
+                            <div className='info-container'>
+                                <p
+                                className='text-container'
+                                >{this.props.item.paymentText}: {this.props.item.paymentAmount} &#8381;</p>
+                                <p
+                                className='date-container'
+                                
+                                >
+                                    {moment(new Date(this.props.item.date)).format(
+                                    "Do MMM YYYY"
+                                    )}
+                                </p>
+                            </div>
+                            <div className='btn-container'>
+                                <Button handleSmth={this.handleSaving.bind(this)} text={'save'} img={pen}/>
+                                <Button handleSmth={this.handleDelete.bind(this)} text={'delete'} img={trashBin}/>
+                            </div>
                         </div>                         
                     }
-                
-              <div>
-                {
-                    this.state.isEditing === true ? 
-                    <div>
-                        <input 
-                        type='date' 
-                        placeholder="date"
-                        id='datePicker'
-                        defaultValue={dafaultDate}
-                        ref={(ref=> {this.dateInput = ref})}
-                        />
-                        <button
-                        onClick={() => this.handleEdit()} 
-                        >save</button>
-                    </div>
-                    : 
-                    <p
-                        onClick={() => this.setState({ 
-                            isEditing: true,
-                        })}
-                    >
-                        {moment(new Date(this.props.item.date)).format(
-                        "Do MMM YYYY"
-                        )}
-                    </p>
-                }
-              </div>
             </div>
         )
     }
