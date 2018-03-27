@@ -1,0 +1,33 @@
+.default-btn {
+        border: none;
+        padding: 5px;
+        font-size: 90%;
+        @include border-radius(8px);
+        display: flex;
+        align-items: center;
+        transform: scale(0.8);
+        transition: all 1s ease;
+        // margin-left: 92%;
+
+        img {
+                // margin-left: 5px;
+                width: 18px;
+                height: 18px;
+        }
+}
+
+.default-btn:hover {
+        transform: scale(1)
+}
+
+.delete {
+        background: $danger-color;        
+}
+
+.save {
+        background-color: $save-color;
+}
+
+.disabled:hover {
+        transform: scale(0.8)
+}

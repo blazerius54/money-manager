@@ -9,6 +9,7 @@
 @import './_payment.scss';
 @import './_header.scss';
 @import './_incomes.scss';
+@import './_button.scss';
  
 * {
     text-decoration: none;
@@ -19,6 +20,7 @@ body {
     // font-family: 'Roboto', sans-serif;
     font-family: $main-font;
     font-size: 105%;
+    background: rgb(248, 248, 248)
 }
 
 ul {
@@ -27,34 +29,22 @@ ul {
 }
 
 h1, p, a {
-    color: rgb(77, 77, 77);
+    color: $font-color;
 }
+
+*:focus {
+    outline:none !important;
+}
+
 .app-wrapper {
-    width: 100%;
+    width: 80%;
     // padding: 20px;
 }
 
 .app-container {
     display: flex;
-    /* justify-content: center; */
     flex-direction: column;
     align-items: center;
-}
-
-.main-content {
-    display: flex;
-    align-items: flex-start;
-}
-
-.main-content > * {
-    flex: 1 0 30%;
-}
-
-.main-content-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // justify-content: flex-end
 }
 
 .info {
@@ -63,4 +53,9 @@ h1, p, a {
 
 .info p {
     margin-left: 3px;
+}
+
+.title {
+    font-size: 100%;
+    font-weight: 600;
 }

@@ -68,19 +68,7 @@ export function reducer(state = [], action) {
             ...state,
             incomes: changeSome(state.incomes, action)
         }
-            // let newIncomes = state.incomes.filter(item=>{
-            //     return item.id !== action.income.id
-            // })
-            // let newIncomes = state.incomes.filter(item=>{
-            //     return item.id !== action.income.id
-            // })
-            // newState = {
-            //     ...state,
-            //     incomes: [
-            //         ...newIncomes, action.income
-            //     ]
-            // }
-            // return newState
+
         case DELETE_INCOME: 
             newState = {
                 ...state,
