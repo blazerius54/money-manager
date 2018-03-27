@@ -2,6 +2,7 @@
   "name": "redux-money-manager",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://blazerius54.github.io/money-manager/",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
@@ -97,6 +98,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "gh-pages": "^1.1.0",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.7"
   }
