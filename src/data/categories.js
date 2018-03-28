@@ -151,7 +151,7 @@ let categories = [
     },
     {   
         path: 'other',
-        name :"прочее",
+        name :"Прочее",
         payments: []
     },
 ]

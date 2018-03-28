@@ -38,7 +38,7 @@ class Categ extends Component {
                             }
                     >
                         <Link className='categ-title' to={path}>
-                                <img src={notePad} alt="add new"/>
+                                {/* <img src={notePad} alt="add new"/> */}
                                 <p>{name}: {spent} &#8381;</p>
                         </Link>
                         <img src={catArrow} alt='o' className='arrow-img' style={height!==50? {transform:'rotate(180deg)'} : {}  } />

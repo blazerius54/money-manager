@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import addToCart from '../images/add-to-cart.png'
 class Form extends Component {
   
     handleSubmit (e) {
@@ -32,7 +32,11 @@ class Form extends Component {
                     this.props.onChangeForm(this.inputText.value, this.inputAmount.value);
                 }}
                 />
-                <input type="submit" />
+                {
+                    this.props.addNew? 
+                        <input type="submit" style={{backgroundImage: 'url(' + addToCart + ')'}}/> :
+                        <input type="submit"/> 
+                }
             </form>
     )
   }

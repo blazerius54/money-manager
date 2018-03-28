@@ -4,7 +4,7 @@ import Payment from './Payment';
 import Form from './Form';
 import { bindActionCreators } from 'redux';
 import { addPayment } from '../actions/index';
-// import moment from 'moment';
+import shoppingCart from '../images/shopping-cart.png';
 
 class SubMain extends Component {
     constructor (props) {
@@ -47,22 +47,32 @@ class SubMain extends Component {
                         {categ.name} 
                     </p>
                 </div>
-                <ul className='payments-container'>
-                    {
-                        this.props.filtredMonth[index].sort((a, b) => {
-                            let date1 = new Date(a.date);
-                            let date2 = new Date(b.date);
-                            return date1 - date2;
-                        }).map((item, i)=>{
-                            monthSpent += item.paymentAmount 
-                            return (
-                                <Payment key={i} item={item} index={index} i={i} categ={index}/>
-                            )
-                        })
-                    }
-                </ul>
-                <p className='sub-main-info'>Потрачено за месяц: { monthSpent} &#8381;</p>
-                <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index}/>
+                {
+                this.props.filtredMonth[index].length > 0?
+                <div>
+                    <ul className='payments-container'>
+                        {
+                            this.props.filtredMonth[index].sort((a, b) => {
+                                let date1 = new Date(a.date);
+                                let date2 = new Date(b.date);
+                                return date1 - date2;
+                            }).map((item, i)=>{
+                                monthSpent += item.paymentAmount 
+                                return (
+                                    <Payment key={i} item={item} index={index} i={i} categ={index}/>
+                                )
+                            })
+                        }
+                    </ul>
+                    <p className='sub-main-info'>Потрачено за месяц: { monthSpent} &#8381;</p> 
+                </div>
+                : 
+                <div className='alternative-div'>
+                    {/* <img src={shoppingCart} alt="shopping-cart" className='shopping-cart'/> */}
+                    <p style={{fontSize: 70+'%'}}>Добавьте траты</p>
+                </div>
+                }
+                <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index} addNew={true}/>
             </div>
         )
     }
@@ -79,6 +89,5 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
     return bindActionCreators({ addPayment }, dispatch)
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubMain);
