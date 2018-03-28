@@ -17,7 +17,7 @@ class Form extends Component {
                     this.inputText = ref;
                 }}
                 type="text"
-                placeholder="Text"
+                placeholder="Текст"
                 onChange={e => {
                     this.props.onChangeForm(this.inputText.value, this.inputAmount.value);
                 }}
@@ -27,7 +27,7 @@ class Form extends Component {
                     this.inputAmount = ref;
                 }}
                 type="text"
-                placeholder="Payment"
+                placeholder="Сумма"
                 onChange={e => {
                     this.props.onChangeForm(this.inputText.value, this.inputAmount.value);
                 }}

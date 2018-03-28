@@ -49,7 +49,6 @@ class SubMain extends Component {
                 </div>
                 {
                 this.props.filtredMonth[index].length > 0?
-                <div>
                     <ul className='payments-container'>
                         {
                             this.props.filtredMonth[index].sort((a, b) => {
@@ -63,13 +62,12 @@ class SubMain extends Component {
                                 )
                             })
                         }
-                    </ul>
                     <p className='sub-main-info'>Потрачено за месяц: { monthSpent} &#8381;</p> 
-                </div>
+                    </ul>
                 : 
                 <div className='alternative-div'>
                     {/* <img src={shoppingCart} alt="shopping-cart" className='shopping-cart'/> */}
-                    <p style={{fontSize: 70+'%'}}>Добавьте траты</p>
+                    <p style={{fontSize: 70+'%'}}>Внесите ваши траты</p>
                 </div>
                 }
                 <Form sendFormData={this.sendFormData.bind(this)} onChangeForm={this.onChangeForm.bind(this)} index={index} addNew={true}/>

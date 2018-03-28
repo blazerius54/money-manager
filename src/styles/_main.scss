@@ -39,13 +39,39 @@
         align-items: center;
 
         .main-content-item {
-            // flex: 1 0 100%;
             width: 100%;
         }
         
         .main-balance {
             margin-top: 50px;
             margin-bottom: 50px;
+        }
+    }
+
+}
+
+@media screen and (max-width: 468px) {
+    .main-content {
+        flex-direction: column;
+        align-items: center;
+        
+        .main-content-item {
+            .payments-container {
+                max-height: 300px;
+            }
+        }
+        
+        .main-balance {
+            margin-top: 0px;            
+            order: 0;
+        }
+
+        .main-payments {
+            order: 1;
+        }
+        
+        .main-incomes {
+            order: 2;
         }
     }
 }

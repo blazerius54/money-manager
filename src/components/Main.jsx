@@ -36,7 +36,7 @@ class Main extends Component {
             <div className='app-wrapper'>
                 {/* <Header /> */}
                 <div className='main-content'>
-                    <div className='main-content-item'>
+                    <div className='main-content-item main-payments'>
                     <p className='title'>Расходы:</p>
                         <ul className='payments-container make-scroll'>
                             {

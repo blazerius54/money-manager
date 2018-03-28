@@ -58,7 +58,7 @@
 
 @media screen and (max-width: 768px) {
     .app-header {
-      justify-content: space-around !important;
+      justify-content: space-between !important;
 
         .input-date {
             flex: 0;
@@ -68,5 +68,12 @@
 @media screen and (max-width: 484px) {
     .app-header {
       flex-direction: column;
+        .input-date {
+            justify-content: center;
+
+            .date-container:first-child {
+                margin-left: 0;
+            } 
+        }
     }
   }

@@ -32,8 +32,9 @@ sendFormData () {
     })
 }
   render() {
-    return <div className='main-content-item'>
+    return <div className='main-content-item main-incomes'>
         <p className='title'>Доходы:</p>
+        <p style={{fontSize: 70+'%'}}>Внесите ваши доходы</p>
         <ul className="payments-container">
           {
             this.props.incomes.sort((a, b) => {

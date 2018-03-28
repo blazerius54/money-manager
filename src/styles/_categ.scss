@@ -18,13 +18,13 @@
         .categ-title {
             display: flex;
             align-items: center;
-            img {
-                @include transition(0.2s);            
-                width: 25px;
-                height: 25px;
-                margin-right: 5px;
-            }
+            // img {
+            //     @include transition(0.2s);            
+            //     width: 25px;
+            //     height: 25px;
+            // }
             p {
+                margin-left: 5px;
                 @include transition(0.2s);            
             }
         }
