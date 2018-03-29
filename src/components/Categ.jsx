@@ -37,7 +37,7 @@ class Categ extends Component {
                                 }
                             }
                     >
-                        <Link className='categ-title' to={process.env.PUBLIC_URL + path}>
+                        <Link className='categ-title' to={process.env.PUBLIC_URL + '/' + path}>
                                 {/* <img src={notePad} alt="add new"/> */}
                                 <p>{name}: {spent} &#8381;</p>
                         </Link>
