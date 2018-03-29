@@ -26,7 +26,7 @@ class App extends Component {
           <div className="app-container">
           <Header />
             <Route exact path={process.env.PUBLIC_URL + '/'} component={Main} />
-            <Route exact path='/:name' component={SubMain} />
+            <Route path={process.env.PUBLIC_URL + '/:name'} component={SubMain} />
           </div>
         </Provider>    
       </Switch>

@@ -12,21 +12,28 @@
 
     .logo-of-app {
         flex: 1 1;
+        @include transition(0.5s);
 
         h2 {
-            // border-bottom: 2px solid rgb(221, 221, 221);
-            // box-shadow: 0px 8px 6px -4px rgb(190, 190, 190);            
             display: inline;
             background: -webkit-radial-gradient(center, ellipse cover, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 50%,rgba(255,255,255,0) 90%); 
             font-size: 180%;
             padding: 10px;        
         }
     }
+
+    .logo-of-app:hover {
+        transform: scale(1.05);
+    }
+
+    .logo-of-app:active {
+        transform: scale(1.1);
+    }
+
     .input-date{
         flex: 1 1 20%;
         display: flex;
     }
-
 
     .date-container {
         width: 10%;
@@ -68,6 +75,7 @@
 @media screen and (max-width: 484px) {
     .app-header {
       flex-direction: column;
+      
         .input-date {
             justify-content: center;
 

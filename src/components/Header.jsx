@@ -20,7 +20,7 @@ class Header extends Component {
         
         return (
             <header className='app-header'>
-                <Link to='/' className='logo-of-app'><h2>Money Manager</h2></Link>
+                <Link to={process.env.PUBLIC_URL + '/'} className='logo-of-app'><h2>Money Manager</h2></Link>
                 <div className='input-date'>
                     <div className='date-container'>
                         <img onClick={()=>this.moveYear(1, null)} src={arrowUp} alt=""/>
