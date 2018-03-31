@@ -37,7 +37,7 @@ class Categ extends Component {
                                 }
                             }
                     >
-                        <Link className='categ-title' to={process.env.PUBLIC_URL + '/' + path}>
+                        <Link className='categ-title' to={process.env.PUBLIC_URL + '/cat-' + path}>
                                 {/* <img src={notePad} alt="add new"/> */}
                                 <p>{name}: {spent} &#8381;</p>
                         </Link>
@@ -45,6 +45,8 @@ class Categ extends Component {
                     </div>
                     <div className='category-container-content'>
                         {
+                            this.props.filtredMonth[this.props.indexCat].length===0?
+                            <p className='categ-empty'>Список трат пуст</p>:
                             this.props.filtredMonth[this.props.indexCat].sort((a, b) => {
                                 let date1 = new Date(a.date);
                                 let date2 = new Date(b.date);

@@ -32,8 +32,7 @@
     }
 
     input[type=submit] {
-        // background-image: url('../images/add-to-cart.png')
-        @include transition(0.1s);
+        @include transition(0.3s);
         background-repeat: no-repeat;
         background-position: 30% 50%;
         background-size: 8%;

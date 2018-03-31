@@ -55,6 +55,11 @@
     .category-container-content {
         display: flex;
         flex-direction: column;
+
+        .categ-empty {
+            font-size: 70%;
+            font-style: italic;
+        }
     }
 }
 
