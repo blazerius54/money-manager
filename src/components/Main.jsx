@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ImageZoom from 'react-medium-image-zoom';
 import Categ from './Categ';
 import Incomes from './Incomes';
-
+import example from '../images/ex-payment.jpg'
+import example2 from '../images/ex-payment-2.jpg'
+import example3 from '../images/ex-income.jpg'
 
 class Main extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            isModalVisible: false,
+            imgHeight: 200
+        }
+    }
 
     render () {
         let monthEarned = 0;
@@ -56,6 +66,65 @@ class Main extends Component {
                     </div>
                     <Incomes incomes={this.props.incomes} month={this.props.date}/>
                 </div>
+                <span onClick={()=>this.setState({isModalVisible: true})} className='about'>?</span>
+                {
+                    this.state.isModalVisible? 
+                    <div className='modal' 
+                    // onClick={()=>this.setState({isModalVisible: false})}
+                    >
+                        <div className='modal-main'>
+                            <div className='close' ><span onClick={()=>this.setState({isModalVisible: false})}>x</span></div>
+                            <div className='modal-main-content'>
+                                {/* <div className='modal-main-content-item'>
+                                    <div className='text-container'>
+                                        <p>Приложение по контролю расходов/доходов</p>
+                                    </div>
+                                    <div className='img-container'>
+                                        <img src={example} alt=""/>
+                                    </div>
+                                </div>
+                                <div className='modal-main-content-item'>
+                                    <div className='text-container'>
+                                        <p>Приложение по контролю расходов/доходов</p>
+                                    </div>
+                                    <div className='img-container'>
+                                        <img src={example2} alt=""/>
+                                    </div>
+                                </div>
+                                <div className='modal-main-content-item'>
+                                    <div className='text-container'>
+                                        <p>Приложение по контролю расходов/доходов</p>
+                                    </div>
+                                    <div className='img-container'>
+                                        <img src={example3} alt=""/>
+                                    </div>
+                                </div> */}
+                                <div className='modal-main-content-item'>
+                                    <div className='text-container'>
+                                        <p>Приложение по контролю расходов/доходов</p>
+                                    </div>
+                                    <div className='img-container'>
+                                        {/* <img src={example3} alt=""/> */}
+                                    
+                                        <ImageZoom
+                                            image={{
+                                            // src: '../images/ex-income-small.jpg',
+                                            src: 'small-app.jpg',
+                                            alt: 'Golden Gate Bridge',
+                                            className: 'img',
+                                            style: { width: '50em' }
+                                            }}
+                                            zoomImage={{
+                                            src: 'big-app.jpg',
+                                            alt: 'Golden Gate Bridge'
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> : ''
+                }
             </div>
         )
     }

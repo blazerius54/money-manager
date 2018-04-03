@@ -1,7 +1,7 @@
 .main-content {
     display: flex;
     align-items: flex-start;
-
+    margin-bottom: 50px;
     .main-content-item {
         flex: 1 0 30%;
         
@@ -12,7 +12,7 @@
         .payments-container {
             list-style-type: none;
             width: 90%;
-            max-height: 550px;
+            max-height: 50vh;
         }
         
         .make-scroll {
