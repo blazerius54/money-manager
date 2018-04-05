@@ -42,13 +42,15 @@ sendFormData () {
               let date2 = new Date(b.date);
               return date1 - date2;
             }).filter((item, index) => {
-              let date = item.date;
+                let date = item.date;
                 let year = new Date(date).getFullYear();
                 let month = new Date(date).getMonth();
                 if(month === new Date(this.props.month).getMonth() &&
                     year === new Date(this.props.month).getFullYear()
                 ) {
                     return item
+                } else {
+                  return null
                 }
             }).map((item, index) => {
               return (

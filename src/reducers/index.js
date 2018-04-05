@@ -13,14 +13,16 @@ export function reducer(state = [], action) {
                 ...state,
                 date: action.date,
                 filtredMonth: state.categories.map(item => {
-                    return item.payments.filter(item=>{
+                    return item.payments.filter(item => {
                         let date = item.date;
                         let year = new Date(date).getFullYear();
                         let month = new Date(date).getMonth();
-                        if(month === new Date(action.date).getMonth() &&
+                        if (month === new Date(action.date).getMonth() &&
                             year === new Date(action.date).getFullYear()
-                        ){
+                        ) {
                             return item
+                        } else {
+                            return null
                         }
                     })
                 })
@@ -50,30 +52,35 @@ export function reducer(state = [], action) {
                             year === new Date(state.date).getFullYear()
                         ){
                             return item
+                        } else {
+                            return null
                         }
                     })
                 })
                     
             }
+            bake_cookie('categories', newState);                        
             return newState
         case ADD_INCOME: 
             newState = {
                 ...state,
                 incomes: addSome(state.incomes, action.income)
             }
-            // bake_cookie('categories', newState);                        
+            bake_cookie('categories', newState);                        
             return newState
         case EDIT_INCOME:
-        return {
-            ...state,
-            incomes: changeSome(state.incomes, action)
-        }
-
+            newState = {
+                ...state,
+                incomes: changeSome(state.incomes, action)
+            }
+            bake_cookie('categories', newState);                        
+            return newState
         case DELETE_INCOME: 
             newState = {
                 ...state,
                 incomes: deleteSome(state.incomes, action.id)
             }
+            bake_cookie('categories', newState);                        
             return newState
         default:
             return state;

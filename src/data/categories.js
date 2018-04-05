@@ -2,9 +2,9 @@ export let date = new Date(Date.now());
 
 
 let categories = [
-    {   
+    {
         path: 'food',
-        name :"Продукты",
+        name: "Продукты",
         // spent : 0,
         payments: [
             // {   
@@ -51,9 +51,9 @@ let categories = [
             // }
         ]
     },
-    {   
+    {
         path: 'apartment',
-        name :"Дом",
+        name: "Дом",
         // spent : 0,
         // text: 'text',
         payments: [
@@ -85,12 +85,12 @@ let categories = [
             //     paymentAmount: 60,
             //     date: 'Fri Mar 29 2018 11:00:19 GMT+0700 (RTZ 6 (зима))'
             // }, 
-            
+
         ]
     },
-    {   
+    {
         path: 'car',
-        name :"Машина",
+        name: "Машина",
         // spent : 0,
         // text: 'text',
         payments: [
@@ -115,58 +115,55 @@ let categories = [
             //     paymentAmount: 100,
             //     date: 'Mar 2 2018 11:00:19 GMT+0700 (RTZ 6 (зима))'
             // }, 
-            
-            
+
+
         ]
     },
-    {   
+    {
         path: 'wear',
-        name :"Одежда",
+        name: "Одежда",
         payments: []
     },
-    {   
+    {
         path: 'relations',
-        name :"Связь",
+        name: "Связь",
         payments: []
     },
-    {   
+    {
         path: 'health',
-        name :"Здоровье",
+        name: "Здоровье",
         payments: []
     },
-    {   
+    {
         path: 'presents',
-        name :"Подарки",
+        name: "Подарки",
         payments: []
     },
-    {   
+    {
         path: 'transport',
-        name :"Транспорт",
+        name: "Транспорт",
         payments: []
     },
-    {   
-        path: 'transport',
-        name :"Транспорт",
-        payments: []
-    },
-    {   
+    {
         path: 'other',
-        name :"Прочее",
+        name: "Прочее",
         payments: []
     },
 ]
 
-export default categories; 
+export default categories;
 
 export let filtredMonth = categories.map(item => {
-    return item.payments.filter(item=>{
+    return item.payments.filter(item => {
         let date2 = item.date;
         let year = new Date(date2).getFullYear();
         let month = new Date(date2).getMonth();
-        if(month === new Date(date).getMonth() &&
+        if (month === new Date(date).getMonth() &&
             year === new Date(date).getFullYear()
-        ){
+        ) {
             return item
+        } else {
+            return null
         }
     })
 })
