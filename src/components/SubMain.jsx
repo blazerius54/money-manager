@@ -4,7 +4,6 @@ import Payment from './Payment';
 import Form from './Form';
 import { bindActionCreators } from 'redux';
 import { addPayment } from '../actions/index';
-import shoppingCart from '../images/shopping-cart.png';
 
 class SubMain extends Component {
     constructor (props) {
@@ -20,7 +19,6 @@ class SubMain extends Component {
             paymentText: text,
             paymentAmount: amount
         })
-        // console.log(this.state)
     }
 
     sendFormData (index) {

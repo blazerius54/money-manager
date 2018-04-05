@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import AnimateHeight from 'react-animate-height';
 import Payment from './Payment';
 import catArrow from '../images/cat-arrow.png';
-import notePad from '../images/new.png';
 
 class Categ extends Component {
     constructor (props) {
